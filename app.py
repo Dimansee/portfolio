@@ -343,30 +343,22 @@ with col2:
 
 # ---------- THIRD PROJECT ----------
 
+import streamlit as st
+
+pdf_file = "assets/sql_project_slides.pdf"
+
 st.markdown("### Business Analysis Case Study")
 
 st.write("Project presentation explaining business insights and analytics strategy.")
 
-pdf_file = "assets/sql_project_slides.pdf"
+with open(pdf_file, "rb") as pdf:
+    st.download_button(
+        "📄 Download Presentation",
+        pdf,
+        file_name="SQL_Project_Case_Study.pdf"
+    )
 
-import base64
-
-with open(pdf_file, "rb") as f:
-    pdf_bytes = f.read()
-
-base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
-
-pdf_display = f"""
-<iframe
-src="data:application/pdf;base64,{base64_pdf}"
-width="100%"
-height="500">
-</iframe>
-"""
-
-st.markdown(pdf_display, unsafe_allow_html=True)
-
-st.markdown('</div>', unsafe_allow_html=True)
+st.image("assets/sql_preview.png")
 
 # SKILLS SECTION
 
@@ -586,4 +578,5 @@ observer.observe(el);
 });
 
 </script>
+
 """, unsafe_allow_html=True)
