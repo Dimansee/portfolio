@@ -1,0 +1,462 @@
+html {
+scroll-behavior: smooth;
+}
+
+/* NAVBAR */
+
+.navbar{
+position:sticky;
+top:0;
+z-index:999;
+
+display:flex;
+justify-content:center;
+gap:30px;
+
+padding:14px 0;
+
+background:rgba(2,6,23,0.85);
+backdrop-filter:blur(8px);
+
+border-bottom:1px solid rgba(59,130,246,0.15);
+}
+
+.navbar a{
+text-decoration:none;
+color:#94a3b8;
+font-weight:500;
+transition:0.25s;
+}
+
+.navbar a:hover{
+color:#60a5fa;
+}
+
+.navbar a.active {
+border-bottom: 3px solid black;
+}
+
+/* HERO SECTION */
+
+.hero {
+padding-top:10px;
+padding-bottom:10px;
+text-align:center;
+}
+
+.hero h1{
+font-size:50px;
+font-weight:700;
+}
+
+.hero h3{
+color:gray;
+}
+
+.hero-buttons-grid{
+display:grid;
+grid-template-columns: repeat(2, 200px);
+justify-content:center;
+gap:18px;
+margin-top:25px;
+}
+
+.hero-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+
+height:44px;
+border-radius:8px;
+
+font-size:14px;
+font-weight:500;
+text-decoration:none;
+
+transition:all 0.25s ease;
+}
+
+.hero-btn.primary{
+background:#3b82f6;
+color:white;
+border:none;
+}
+
+.hero-btn.primary:hover{
+background:#2563eb;
+transform:translateY(-2px);
+}
+
+.hero-btn.secondary{
+border:1px solid #334155;
+color:#cbd5f5;
+background:transparent;
+}
+
+.hero-btn.secondary:hover{
+border-color:#3b82f6;
+color:#3b82f6;
+transform:translateY(-2px);
+}
+
+.hero-buttons a{
+padding:10px 20px;
+border:1px solid white;
+margin:10px;
+border-radius:6px;
+text-decoration:none;
+color:white;
+transition:0.3s;
+}
+
+.hero-buttons a:hover{
+background:white;
+color:black;
+}
+
+/* SECTION STYLE */
+
+.section{
+padding-top:40px;
+padding-bottom:40px;
+margin-top:10px;
+margin-bottom:10px;
+}
+
+.section-title{
+font-size:36px;
+font-weight:700;
+margin-bottom:25px;
+margin-top: 10;
+text-align:center;
+letter-spacing:1px;
+}
+
+.timeline{
+margin-bottom:20px;
+}
+
+.block-container{
+padding-top:2rem;
+padding-bottom:2rem;
+}
+
+/* PROJECT CARDS */
+
+.project-card{
+border:1px solid rgba(59,130,246,0.2);
+border-radius:14px;
+padding:20px;
+margin-bottom:20px;
+background:#020617;
+}
+
+.project-card:hover{
+transform:translateY(-8px);
+box-shadow:0 12px 35px rgba(59,130,246,0.25);
+border-color:#3b82f6;
+}
+
+.project-card img{
+transition:0.35s ease;
+}
+
+.project-card:hover img{
+transform:scale(1.05);
+}
+
+/* EXPERIENCE CARD */
+
+.timeline{
+position:relative;
+margin-top:40px;
+padding-left:40px;
+margin-bottom: 20px;
+}
+
+.timeline:before{
+content:'';
+position:absolute;
+left:10px;
+top:0;
+width:2px;
+height:100%;
+background:#3b82f6;
+}
+
+.timeline-item{
+position:relative;
+margin-bottom:40px;
+}
+
+.timeline-dot{
+position:absolute;
+left:-1px;
+top:12px;
+
+width:14px;
+height:14px;
+
+background:#3b82f6;
+border-radius:50%;
+
+box-shadow:0 0 10px rgba(59,130,246,0.8);
+}
+
+.timeline-card{
+
+background:#0b162c;
+border:1px solid rgba(59,130,246,0.2);
+
+border-radius:14px;
+padding:25px;
+
+transition:0.35s ease;
+}
+
+.timeline-card:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 10px 25px rgba(59,130,246,0.25);
+
+border-color:#3b82f6;
+
+}
+
+.timeline-card ul{
+padding-left:20px;
+line-height:1.7;
+}
+
+.company{
+color:#60a5fa;
+}
+
+.date{
+color:#94a3b8;
+font-size:14px;
+margin-bottom:10px;
+}
+
+.tools{
+margin-top:10px;
+color:#94a3b8;
+font-size:14px;
+}
+
+/* Reduce Width for Better Readability */
+
+.block-container{
+max-width:1100px;
+margin:auto;
+}
+
+/* HERO TYPING BOX */
+
+.hero-typing-box{
+height:70px;
+display:flex;
+align-items:center;
+justify-content:center;
+
+margin-bottom:25px;
+
+border-radius:18px;
+border:1px solid #3b82f6;
+
+background:
+linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px);
+
+background-size:40px 40px;
+}
+
+/* TYPING TEXT */
+
+#typing{
+color:#60a5fa;
+font-weight:600;
+font-size:24px;
+letter-spacing:1px;
+}
+
+/* CURSOR */
+
+#typing::after{
+content:"|";
+margin-left:6px;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+0%{opacity:1;}
+50%{opacity:0;}
+100%{opacity:1;}
+}
+
+/* PROJECT IMAGES SECTION */
+
+img{
+border-radius:10px;
+border:1px solid #1f2937;
+}
+
+/* SCROLL ANIMATION */
+
+.fade-in{
+opacity:0;
+transform:translateY(30px);
+transition:all 0.6s ease;
+}
+
+.fade-in.visible{
+opacity:1;
+transform:translateY(0);
+}
+
+
+.fade-in.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* HOVER EFFECT */
+
+img:hover{
+transform:scale(1.03);
+transition:0.3s;
+}
+
+/* SOCIAL IMAGE */
+
+.social-links{
+margin-top:20px;
+display:flex;
+justify-content:center;
+gap:25px;
+font-size:24px;
+}
+
+.social-links a{
+color:#9ca3af;
+transition:0.3s;
+}
+
+.social-links a:hover{
+color:#3b82f6;
+}
+
+.social-icons{
+display:flex;
+justify-content:center;
+gap:22px;
+margin-top:15px;
+}
+
+.social-icons a{
+font-size:22px;
+color:#94a3b8;
+transition:0.3s;
+}
+
+.social-icons a:hover{
+color:#3b82f6;
+transform:translateY(-3px);
+}
+
+/* The container for the SKILL graph */
+.skills-card{
+border-radius:18px;
+border:1px solid rgba(59,130,246,0.25);
+
+box-shadow:
+0 0 20px rgba(59,130,246,0.15),
+inset 0 0 20px rgba(59,130,246,0.05);
+
+transition:0.3s ease;
+}
+
+.skills-card:hover{
+box-shadow:
+0 0 40px rgba(59,130,246,0.35),
+inset 0 0 20px rgba(59,130,246,0.08);
+}
+
+/* The subtle grid pattern inside */
+.skills-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    border-radius: 18px;
+    pointer-events: none; /* Crucial: so you can still click the graph */
+    z-index: 0;
+}
+
+/* THIS IS FOR SKLL TAGS */
+
+.tags{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:10px;
+margin-top:25px;
+}
+
+.tags span{
+background:#0f172a;
+border:1px solid #334155;
+padding:8px 14px;
+border-radius:20px;
+font-size:13px;
+color:#e2e8f0;
+transition:0.3s;
+}
+
+.tags span:hover{
+border-color:#3b82f6;
+color:#3b82f6;
+}
+
+/* Recruiter-Friendly Metrics Section */
+
+.metrics{
+display:flex;
+justify-content:center;
+gap:60px;
+margin:40px 0;
+}
+
+.metrics h3{
+color:#60a5fa;
+font-size:32px;
+margin:0;
+}
+
+.metrics p{
+color:#94a3b8;
+font-size:14px;
+}
+
+/* CSS for bullent styling in Exp sextion */
+
+.exp-points{
+margin-top:12px;
+padding-left:20px;
+color:#cbd5e1;
+line-height:1.7;
+}
+
+.exp-points li{
+margin-bottom:8px;
+}
+
+.tools{
+margin-top:10px;
+color:#94a3b8;
+font-size:14px;
+}
