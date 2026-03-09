@@ -1,5 +1,6 @@
 streamlit
-streamlit-agraph
+pyvis
 pandas
 numpy
 matplotlib
+
