@@ -4,5 +4,6 @@ pyvis
 pandas
 numpy
 matplotlib
+streamlit-pdf-viewer
 
 
