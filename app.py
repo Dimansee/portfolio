@@ -231,7 +231,7 @@ I work with a variety of tools and technologies to analyze, transform, and visua
 Data Analysis & Programming
 <li>Python (Pandas, NumPy, data analysis)
 <li>SQL (data extraction, joins, aggregations, performance queries)
-<ul>
+</ul>
 
 <ul class="abt-points">
 Data Visualization & Reporting
@@ -586,6 +586,7 @@ observer.observe(el);
 </script>
 
 """, unsafe_allow_html=True)
+
 
 
 
