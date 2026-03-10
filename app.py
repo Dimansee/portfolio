@@ -227,18 +227,24 @@ Hi, I'm Mann Choudhary, a Data Analyst passionate about turning raw data into me
 With 2+ years of experience in data operations and MIS reporting, I have worked with large datasets, built reports, and developed analytical solutions that improve business visibility and performance.
 I work with a variety of tools and technologies to analyze, transform, and visualize data:
 
+<ul class="abt-points">
 Data Analysis & Programming
-• Python (Pandas, NumPy, data analysis & automation)
-• SQL (data extraction, joins, aggregations, performance queries)
+<li>Python (Pandas, NumPy, data analysis)
+<li>SQL (data extraction, joins, aggregations, performance queries)
+<ul>
 
+<ul class="abt-points">
 Data Visualization & Reporting
-• Power BI – interactive dashboards and KPI tracking
-• Microsoft Excel – advanced formulas, pivot tables, data analysis
-• Google Sheets – reporting, collaboration, and automation
+<li>Power BI – interactive dashboards and KPI tracking
+<li>Microsoft Excel – advanced formulas, pivot tables, data analysis
+<li>Google Sheets – reporting, collaboration, and automation
+<ul>
 
+<ul class="abt-points">
 Data Platforms & Databases
-• BigQuery – querying large-scale datasets
-• SQL databases for structured data analysis
+<li>BigQuery – querying large-scale datasets
+<li>SQL databases for structured data analysis
+<ul>
 
 I enjoy solving business problems using data-driven approaches, forecasting models, and analytical thinking. Recently, I built and deployed a SKU-level demand forecasting engine using statistical models, Prophet, and machine learning, making the insights accessible through a Streamlit application.
 I am continuously expanding my skills in advanced analytics, predictive modeling, and data storytelling while building projects that demonstrate real-world business impact.
@@ -580,4 +586,5 @@ observer.observe(el);
 </script>
 
 """, unsafe_allow_html=True)
+
 
