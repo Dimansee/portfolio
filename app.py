@@ -238,13 +238,13 @@ Data Visualization & Reporting
 <li>Power BI – interactive dashboards and KPI tracking
 <li>Microsoft Excel – advanced formulas, pivot tables, data analysis
 <li>Google Sheets – reporting, collaboration, and automation
-<ul>
+</ul>
 
 <ul class="abt-points">
 Data Platforms & Databases
 <li>BigQuery – querying large-scale datasets
 <li>SQL databases for structured data analysis
-<ul>
+</ul>
 
 I enjoy solving business problems using data-driven approaches, forecasting models, and analytical thinking. Recently, I built and deployed a SKU-level demand forecasting engine using statistical models, Prophet, and machine learning, making the insights accessible through a Streamlit application.
 I am continuously expanding my skills in advanced analytics, predictive modeling, and data storytelling while building projects that demonstrate real-world business impact.
@@ -586,5 +586,6 @@ observer.observe(el);
 </script>
 
 """, unsafe_allow_html=True)
+
 
 
