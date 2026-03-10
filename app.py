@@ -84,7 +84,7 @@ setTimeout(type, 80);
 
 </script>
 """,
-height=70
+height=80
 )
 
 # NAVBAR
@@ -580,3 +580,4 @@ observer.observe(el);
 </script>
 
 """, unsafe_allow_html=True)
+
