@@ -223,34 +223,35 @@ with col1:
 
 with col2:
     st.write("""
-Hi, I'm Mann Choudhary, a Data Analyst passionate about turning raw data into meaningful insights that help businesses make smarter decisions.
+Hi, I'm <b>Mann Choudhary</b>, a Data Analyst passionate about turning raw data into meaningful insights that help businesses make smarter decisions.
+
 With 2+ years of experience in data operations and MIS reporting, I have worked with large datasets, built reports, and developed analytical solutions that improve business visibility and performance.
+
 I work with a variety of tools and technologies to analyze, transform, and visualize data:
 
 <ul class="abt-points">
-Data Analysis & Programming
-<li>Python (Pandas, NumPy, data analysis)
-<li>SQL (data extraction, joins, aggregations, performance queries)
+<b>Data Analysis & Programming</b>
+<li>Python (Pandas, NumPy, data analysis)</li>
+<li>SQL (data extraction, joins, aggregations, performance queries)</li>
 </ul>
 
 <ul class="abt-points">
-Data Visualization & Reporting
-<li>Power BI – interactive dashboards and KPI tracking
-<li>Microsoft Excel – advanced formulas, pivot tables, data analysis
-<li>Google Sheets – reporting, collaboration, and automation
+<b>Data Visualization & Reporting</b>
+<li>Power BI – interactive dashboards and KPI tracking</li>
+<li>Microsoft Excel – advanced formulas, pivot tables, and data analysis</li>
+<li>Google Sheets – reporting, collaboration, and automation</li>
 </ul>
 
 <ul class="abt-points">
-Data Platforms & Databases
-<li>BigQuery – querying large-scale datasets
-<li>SQL databases for structured data analysis
+<b>Data Platforms & Databases</b>
+<li>BigQuery – querying large-scale datasets</li>
+<li>SQL databases for structured data analysis</li>
 </ul>
 
 I enjoy solving business problems using data-driven approaches, forecasting models, and analytical thinking. Recently, I built and deployed a SKU-level demand forecasting engine using statistical models, Prophet, and machine learning, making the insights accessible through a Streamlit application.
-I am continuously expanding my skills in advanced analytics, predictive modeling, and data storytelling while building projects that demonstrate real-world business impact.
-""")
 
-st.markdown('</div>', unsafe_allow_html=True)
+I am continuously expanding my skills in advanced analytics, predictive modeling, and data storytelling while building projects that demonstrate real-world business impact.
+""", unsafe_allow_html=True)
 
 # EXPERIENCE SECTION
 
@@ -586,6 +587,7 @@ observer.observe(el);
 </script>
 
 """, unsafe_allow_html=True)
+
 
 
 
