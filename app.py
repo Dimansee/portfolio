@@ -199,7 +199,7 @@ st.markdown("""
 
   <!-- FIX 5: location tag -->
   <div class="location-tag">
-    <i class="fas fa-map-marker-alt"></i>&nbsp; Jaipur, India &nbsp;&bull;&nbsp; Open to Remote
+    <i class="fas fa-map-marker-alt"></i>&nbsp; Jaipur, India &nbsp;&bull;&nbsp; Open to Relocate
   </div>
 
 </div>
@@ -477,7 +477,7 @@ st.markdown(f"""
     </div>
     <div class="proj-body">
       <div class="proj-tags">
-        <span>Power BI</span><span>Power Query</span><span>DAX</span><span>KPI</span>
+        <span>Power BI</span><span>Power Query</span><span>KPI</span>
       </div>
       <div class="proj-title">Sales Analytics Dashboard</div>
       <div class="proj-desc">Cleaned and transformed data using Power Query. Analyzed yearly
