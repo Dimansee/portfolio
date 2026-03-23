@@ -22,6 +22,15 @@ def load_css():
 
 load_css()
 
+# Helper — convert any image file to base64 for embedding in HTML
+import os
+
+def img_to_b64(path):
+    if os.path.exists(path):
+        with open(path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    return ""
+
 # ── TYPING ANIMATION ─────────────────────────────────────────────────────────
 components.html("""
 <div style="text-align:center; font-size:26px; font-weight:600;
@@ -190,7 +199,7 @@ st.markdown("""
 
   <!-- FIX 5: location tag -->
   <div class="location-tag">
-    <i class="fas fa-map-marker-alt"></i>&nbsp; Jaipur, India &nbsp;&bull;&nbsp; Open to Relocate
+    <i class="fas fa-map-marker-alt"></i>&nbsp; Jaipur, India &nbsp;&bull;&nbsp; Open to Remote
   </div>
 
 </div>
@@ -416,14 +425,7 @@ st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
 st.markdown('<div id="projects" class="section">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Projects</div>', unsafe_allow_html=True)
 
-# Read forecasting image for base64 embed (avoids Streamlit path issues in HTML)
-import os
 
-def img_to_b64(path):
-    if os.path.exists(path):
-        with open(path, "rb") as f:
-            return base64.b64encode(f.read()).decode()
-    return ""
 
 fc_b64  = img_to_b64("assets/forecasting.png")
 sd_b64  = img_to_b64("assets/sales_dashboard.png")
@@ -475,7 +477,7 @@ st.markdown(f"""
     </div>
     <div class="proj-body">
       <div class="proj-tags">
-        <span>Power BI</span><span>Power Query</span><span>KPI</span>
+        <span>Power BI</span><span>Power Query</span><span>DAX</span><span>KPI</span>
       </div>
       <div class="proj-title">Sales Analytics Dashboard</div>
       <div class="proj-desc">Cleaned and transformed data using Power Query. Analyzed yearly
@@ -584,7 +586,7 @@ tags = [
     "Data Analyst", "Python", "SQL", "Power BI", "Tableau", "Looker Studio",
     "BigQuery", "GCP", "Excel", "Google Sheets", "BRDs",
     "Forecasting", "Data Visualization", "Business Intelligence",
-    "Data Storytelling", "Reporting", "KPI Analysis", "API", "AI Tools"
+    "Data Storytelling", "Reporting", "KPI Analysis",
     "Pandas", "NumPy", "Matplotlib", "Streamlit", "Collaboration", "Communication"
 ]
 
