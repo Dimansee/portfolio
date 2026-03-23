@@ -424,20 +424,22 @@ st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
 # ── PROJECTS — stacked card overlay style ────────────────────────────────────
 st.markdown('<div id="projects" class="section">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Projects</div>', unsafe_allow_html=True)
-
-
-
-fc_b64  = img_to_b64("assets/forecasting.png")
-sd_b64  = img_to_b64("assets/sales_dashboard.png")
-sql_b64 = img_to_b64("assets/sql_preview.png")
-
-fc_src  = f"data:image/png;base64,{fc_b64}"  if fc_b64  else ""
-sd_src  = f"data:image/png;base64,{sd_b64}"  if sd_b64  else ""
-sql_src = f"data:image/png;base64,{sql_b64}" if sql_b64 else ""
-
+ 
+ 
+ 
+fc_b64   = img_to_b64("assets/forecasting.png")
+sd_b64   = img_to_b64("assets/sales_dashboard.png")
+sql_b64  = img_to_b64("assets/sql_preview.png")
+case_b64 = img_to_b64("assets/sql_project_slides.pdf")
+ 
+fc_src   = f"data:image/png;base64,{fc_b64}"   if fc_b64   else ""
+sd_src   = f"data:image/png;base64,{sd_b64}"   if sd_b64   else ""
+sql_src  = f"data:image/png;base64,{sql_b64}"  if sql_b64  else ""
+case_src = f"data:application/pdf;base64,{case_b64}" if case_b64 else ""
+ 
 st.markdown(f"""
 <div class="projects-grid">
-
+ 
   <!-- Card 1 -->
   <div class="proj-card">
     <div class="proj-img-wrap">
@@ -462,7 +464,7 @@ st.markdown(f"""
       Facebook Prophet, and ML — deployed as a live Streamlit app.</div>
     </div>
   </div>
-
+ 
   <!-- Card 2 -->
   <div class="proj-card">
     <div class="proj-img-wrap">
@@ -477,7 +479,7 @@ st.markdown(f"""
     </div>
     <div class="proj-body">
       <div class="proj-tags">
-        <span>Power BI</span><span>Power Query</span><span>KPI</span>
+        <span>Power BI</span><span>Power Query</span><span>DAX</span><span>KPI</span>
       </div>
       <div class="proj-title">Sales Analytics Dashboard</div>
       <div class="proj-desc">Cleaned and transformed data using Power Query. Analyzed yearly
@@ -485,7 +487,7 @@ st.markdown(f"""
       growth, and returns.</div>
     </div>
   </div>
-
+ 
   <!-- Card 3 — full width -->
   <div class="proj-card proj-card-wide">
     <div class="proj-wide-left">
@@ -496,19 +498,21 @@ st.markdown(f"""
       <div class="proj-desc">End-to-end SQL project covering data extraction, transformation,
       and business insights. Covers KPI analysis, trend identification, and executive-level
       storytelling with a full ERD and slide deck.</div>
-      <a href="assets/sql_project_slides.pdf" download="Mann_SQL_Case_Study.pdf"
+      {f'''<a href="{case_src}" download="Mann_SQL_Case_Study.pdf"
          class="proj-download-btn">
         <i class="fas fa-download"></i>&nbsp; Download Case Study PDF
-      </a>
+      </a>''' if case_src else '''<span class="proj-download-btn" style="opacity:0.4;cursor:not-allowed;">
+        <i class="fas fa-download"></i>&nbsp; PDF Not Found
+      </span>'''}
     </div>
     <div class="proj-wide-right">
       {"<img src='" + sql_src + "' alt='SQL Preview'/>" if sql_src else "<div class='proj-img-placeholder' style='height:220px;border-radius:0 12px 12px 0;'><i class='fas fa-database'></i></div>"}
     </div>
   </div>
-
+ 
 </div>
 """, unsafe_allow_html=True)
-
+ 
 st.markdown('</div>', unsafe_allow_html=True)
 st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
 
