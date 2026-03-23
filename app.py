@@ -286,7 +286,7 @@ st.markdown("""
 <div class="timeline-dot"></div>
 <div class="timeline-card">
 
-<div class="timeline-title">Data Entry Operator</div>
+<div class="timeline-title">Data Entry Operator / MIS Analyst</div>
 
 <div class="timeline-company">Dakshina Overseas</div>
 
