@@ -1,0 +1,507 @@
+# Mann Choudhary — Portfolio Editing Guide
+### File: `app.py` + `styles/style.css`
+
+This document explains every section of your portfolio — what it does, where it lives in the code, and exactly what to change when you need to edit it.
+
+---
+
+## File Structure
+
+```
+Portfolio-streamlit/
+│
+├── app.py                     ← Main Python file (all sections)
+├── styles/
+│   └── style.css              ← All visual styling
+├── assets/
+│   ├── profile.png            ← Your profile photo
+│   ├── resume.pdf             ← Your resume (auto-downloaded by buttons)
+│   ├── forecasting.png        ← Project 1 screenshot
+│   ├── sales_dashboard.png    ← Project 2 screenshot
+│   ├── sql_preview.png        ← Project 3 screenshot
+│   └── sql_project_slides.pdf ← Project 3 PDF download
+```
+
+---
+
+## Section 1 — Page Config
+**Location:** `app.py` — Lines 7–11
+
+```python
+st.set_page_config(
+    page_title="Mann Choudhary | Data Analyst",   # ← Browser tab title
+    page_icon="📊",                                # ← Browser tab icon (emoji or path)
+    layout="wide"                                  # ← Don't change this
+)
+```
+
+**What to edit:**
+- `page_title` — change to your name and role
+- `page_icon` — change to any emoji like 🧠, 📈, 💼
+
+---
+
+## Section 2 — Typing Animation
+**Location:** `app.py` — Lines 25–60
+
+```python
+const texts = ["Data Analyst", "SQL Developer", "Analytics Engineer",
+               "Python Developer", "Data Engineer", "Business Analyst"];
+```
+
+**What to edit:**
+- Add or remove job titles inside the `[ ]` list
+- Each title must be in `"quotes"` and separated by commas
+- `setTimeout(type, 1400)` → the pause between words (in milliseconds). Increase for slower, decrease for faster
+- `setTimeout(type, 80)` → typing speed per letter. Increase = slower typing
+
+---
+
+## Section 3 — Navbar
+**Location:** `app.py` — Lines 62–176
+
+```javascript
+var links = [
+  ['About',          'about'],
+  ['Experience',     'experience'],
+  ['Projects',       'projects'],
+  ['Skills',         'skills'],
+  ['Certifications', 'certifications'],
+  ['Contact',        'contact']
+];
+```
+
+**What to edit:**
+- To **rename** a nav item: change the first word e.g. `['Work History', 'experience']`
+- To **add a new nav item**: add a new line like `['Education', 'education']`
+  - You must also add `<div id="education" class="section">` in your new section in app.py
+- To **remove** a nav item: delete that line
+- **Gap between links:** find `gap: 32px` in the navbar style block → increase or decrease
+- **Font size:** find `font-size: 14px` → change as needed
+
+---
+
+## Section 4 — Hero (Name, Badge, Tagline)
+**Location:** `app.py` — Lines 178–197
+
+```html
+<div class="open-to-work-badge">
+  <span class="otw-dot"></span> Open to Work     ← Change badge text here
+</div>
+
+<h1>Mann Choudhary</h1>                          ← Your name
+
+<div class="hero-subtitle">
+  Data Analyst | Python | SQL | Power BI         ← Your subtitle line
+</div>
+
+<div class="hero-tagline">
+  Transforming raw data into actionable...        ← One-line tagline
+</div>
+
+<div class="location-tag">
+  Jaipur, India · Open to Remote                 ← Your location
+</div>
+```
+
+**What to edit:**
+- **Name:** replace `Mann Choudhary` with your name
+- **Subtitle:** update tools/roles separated by `&nbsp;|&nbsp;`
+- **Tagline:** your personal one-liner
+- **Location:** update city and work preference
+- **Open to Work badge:** change text or remove the entire `<div class="open-to-work-badge">` block if not needed
+- **To hide the badge:** delete lines 183–185 in app.py
+
+**CSS for hero** → `style.css` — search `.hero`, `.hero-subtitle`, `.hero-tagline`, `.open-to-work-badge`
+
+---
+
+## Section 5 — Metrics Bar
+**Location:** `app.py` — Lines 199–219
+
+```html
+<div class="metric-item">
+  <h3>40%</h3>                    ← The big number
+  <p>Reporting Automation</p>     ← The label below
+</div>
+```
+
+**What to edit:**
+- Change `40%`, `12+`, `10+`, `4+ Yrs` to your actual numbers
+- Change the label text below each number
+- To **add a 5th metric**: add another `<div class="metric-item">` block
+  - Note: you'll need to change the CSS grid from `repeat(4, 1fr)` to `repeat(5, 1fr)` in `style.css` (search `.metrics`)
+
+---
+
+## Section 6 — Social Icons
+**Location:** `app.py` — Lines 221–241
+
+```html
+<a href="https://www.linkedin.com/in/mann-choudhary-data-analyst" target="_blank">
+  <i class="fab fa-linkedin"></i>
+</a>
+```
+
+**What to edit:**
+- Replace each `href="..."` URL with your own links
+- **Icon names** come from Font Awesome. Browse icons at: https://fontawesome.com/icons
+  - `fab fa-linkedin` → LinkedIn
+  - `fab fa-github` → GitHub
+  - `fas fa-envelope` → Email
+  - `fas fa-phone` → Phone
+  - `fab fa-google-drive` → Google Drive
+- To **add a new icon**: copy one block and change the href and icon class
+- To **remove an icon**: delete that `<a>...</a>` block
+
+---
+
+## Section 7 — Hero Buttons
+**Location:** `app.py` — Lines 243–269
+
+```html
+<a href="#projects" class="hero-btn primary">
+  View Projects                             ← Button 1 text
+</a>
+
+<a href="mailto:manndimansee@gmail.com" class="hero-btn secondary">
+  Contact Me                                ← Button 3 text
+</a>
+
+<a href="https://drive.google.com/..." class="hero-btn secondary">
+  Portfolio Files                           ← Button 4 text
+</a>
+```
+
+**What to edit:**
+- Change button labels (text between `>` and `</a>`)
+- Change `href` links to your own URLs
+- `Download Resume` button uses the PDF at `assets/resume.pdf` — just replace that file with your updated resume, keep the same filename
+- Button style classes: `primary` = blue filled, `secondary` = outlined
+
+---
+
+## Section 8 — About Me
+**Location:** `app.py` — Lines 273–299
+
+```python
+st.image("assets/profile.png", width=220)   # ← Profile photo, change width if needed
+```
+
+```html
+Hi, I'm <b>Mann Choudhary</b> — ...         ← Edit your intro paragraph
+
+<ul class="abt-points">
+  <li><b>Data Analysis</b> — Python...</li>  ← Edit each bullet point
+  <li><b>Visualization</b> — Power BI...</li>
+  <li><b>Data Platforms</b> — BigQuery...</li>
+</ul>
+```
+
+**What to edit:**
+- Replace the intro paragraph text with your own story
+- Update the 3 bullet points with your skill categories
+- Add more `<li>` items inside `<ul class="abt-points">` for additional skill areas
+- Change profile image: replace `assets/profile.png` with your photo (keep same filename)
+- Change photo width: edit `width=220` (pixels)
+
+---
+
+## Section 9 — Experience
+**Location:** `app.py` — Lines 302–403
+
+Each job card has this structure:
+
+```html
+<div class="exp-logo">S</div>              ← Single letter logo (first letter of company)
+
+<div class="exp-role">Senior Executive — Data Analyst</div>   ← Job title
+<div class="exp-sub-role">Founder's Office</div>              ← Department / team
+<span class="exp-company">SAADAA</span>                       ← Company name
+<span class="exp-type-badge">Full-time</span>                 ← Employment type
+
+<div class="exp-date">May 2025 — Dec 2025</div>               ← Date range
+<div class="exp-duration">8 months</div>                      ← Duration
+
+<!-- Impact chips -->
+<span class="chip-num">40%</span>
+<span class="chip-label">Reporting Automated</span>           ← Impact metric
+
+<!-- Bullet points -->
+<li>Your achievement here</li>
+
+<!-- Tool tags at bottom -->
+<span>BigQuery</span><span>SQL</span>
+```
+
+**What to edit:**
+- **Job title:** edit `exp-role` text
+- **Department:** edit `exp-sub-role` text
+- **Company name:** edit `exp-company` text and the logo letter `<div class="exp-logo">S</div>`
+- **Dates:** edit `exp-date` and `exp-duration`
+- **Impact chips:** change the numbers and labels in `chip-num` / `chip-label`
+- **Bullets:** edit or add `<li>` items inside `<ul class="exp-points">`
+- **Tools:** add/remove `<span>ToolName</span>` items in `exp-tools-row`
+
+**To add a new job:** Copy the entire `<div class="exp-card">...</div>` block and paste it above or below, then edit all the content inside.
+
+**To change job card color** (currently Job 1 = blue, Job 2 = purple):
+- The accent bar color is set inline: `style="background:linear-gradient(to bottom,#a855f7,...)"`
+- The logo color is also inline: `style="background:rgba(168,85,247,0.12);color:#a855f7;..."`
+- Replace `#a855f7` with any hex color you want
+
+---
+
+## Section 10 — Projects
+**Location:** `app.py` — Lines 408–503
+
+### Project 1 & 2 (side by side cards)
+
+```html
+<div class="proj-overlay-title">Demand Forecasting Engine</div>     ← Overlay title (on hover)
+<div class="proj-overlay-desc">Short description on hover</div>     ← Overlay description
+<a href="https://your-app-url.streamlit.app/" class="overlay-btn">  ← Live app link
+  View Live App
+</a>
+
+<div class="proj-tags">
+  <span>Python</span><span>Prophet</span>                           ← Tech tags
+</div>
+<div class="proj-title">Demand Forecasting Engine</div>             ← Card title
+<div class="proj-desc">Full description shown always</div>          ← Card description
+```
+
+### Project 3 (full-width card)
+
+```html
+<div class="proj-title">Business Analysis Case Study</div>
+<div class="proj-desc">Your description here</div>
+<a href="assets/sql_project_slides.pdf" download="Mann_SQL_Case_Study.pdf">
+  Download Case Study PDF
+</a>
+```
+
+**What to edit:**
+- **Project image:** replace the image file in `assets/` folder (keep same filename)
+- **Overlay title/desc:** what appears when you hover over the image
+- **Live app link:** change the `href` in `overlay-btn`
+- **Tech tags:** add/remove `<span>TagName</span>` in `proj-tags`
+- **Card title and description:** edit `proj-title` and `proj-desc`
+- **Download file:** replace `assets/sql_project_slides.pdf` and update `download="YourFile.pdf"`
+
+**To add a 4th project:** Copy a `<div class="proj-card">` block, paste inside `<div class="projects-grid">`, and add a new image file in assets.
+
+---
+
+## Section 11 — Skills Graph
+**Location:** `app.py` — Lines 506–571
+
+### Node colors
+```python
+colors = {
+    "center": "#1E293B",   ← Center node (My Expertise) — dark grey
+    "tech":   "#3B82F6",   ← Technical nodes — blue
+    "biz":    "#A855F7",   ← Business nodes — purple
+    "soft":   "#10B981",   ← Professional nodes — green
+    "ai":     "#F59E0B",   ← AI Tools nodes — orange/yellow
+    "vis":    "#4206cf"    ← Visualization nodes — dark blue/indigo
+}
+```
+
+### Adding a new skill node
+```python
+# Add to nodes list:
+Node(id="Spark", label="Apache Spark", size=45, shape="circle",
+     color=colors["tech"], font={"size": 8, "color": "white"}),
+
+# Add to edges list to connect it:
+Edge(source="T", target="Spark"),   # connects to Technical parent
+```
+
+### Changing node size
+- `size=80` → center node (biggest)
+- `size=60` → category nodes (Technical, Business, etc.)
+- `size=45` → skill nodes (Python, SQL, etc.)
+
+### Skill Tags (below the graph)
+```python
+tags = [
+    "Data Analyst", "Python", "SQL", ...   ← Add or remove tags here
+]
+```
+Just add a new string inside the list: `"Apache Spark"` — it will appear as a pill tag.
+
+---
+
+## Section 12 — Certifications
+**Location:** `app.py` — Lines 594–644
+
+```html
+<div class="cert-card">
+  <div class="cert-icon"><i class="fab fa-google"></i></div>     ← Icon (Font Awesome)
+  <div class="cert-body">
+    <div class="cert-title">Google Data Analytics</div>          ← Cert name
+    <div class="cert-issuer">Google / Coursera</div>             ← Issuer
+    <div class="cert-status in-progress">In Progress</div>       ← Status badge
+  </div>
+</div>
+```
+
+**What to edit:**
+- **Cert name:** edit `cert-title`
+- **Issuer:** edit `cert-issuer`
+- **Status badge:** change `in-progress` to `completed` (also changes color automatically)
+  - `class="cert-status completed"` → green badge
+  - `class="cert-status in-progress"` → yellow/amber badge
+- **Icon:** change the Font Awesome class. Common ones:
+  - `fab fa-google` → Google
+  - `fab fa-microsoft` → Microsoft
+  - `fas fa-database` → Database/SQL
+  - `fas fa-chart-bar` → Analytics/BI
+  - `fab fa-aws` → AWS
+  - `fas fa-certificate` → Generic cert
+- **Icon color:** change inline `style="color:#0078d4;"` to any hex color
+
+**To add a new cert:** Copy one `<div class="cert-card">` block and paste inside `<div class="cert-grid">`.
+
+**To remove the placeholder note** at the bottom, delete this line:
+```html
+<p style="text-align:center; ...">* Update cert names...</p>
+```
+
+---
+
+## Section 13 — Contact
+**Location:** `app.py` — Lines 647–692
+
+```html
+<p>Open to Data Analyst, Analytics Engineer, and BI roles.</p>     ← Subtitle text
+
+<p>Jaipur, Rajasthan, India · Open to Remote & Hybrid</p>          ← Location line
+
+<a href="mailto:manndimansee@gmail.com" class="contact-card">       ← Email link
+  <div class="contact-value">manndimansee@gmail.com</div>           ← Email displayed
+</a>
+
+<a href="https://www.linkedin.com/in/mann-choudhary-data-analyst">  ← LinkedIn link
+  <div class="contact-value">mann-choudhary-data-analyst</div>      ← Text displayed
+</a>
+```
+
+**What to edit:**
+- Update each `href` with your own links
+- Update each `contact-value` with your displayed text
+- Update the subtitle paragraph and location line
+- **To add a new contact card:** copy one `<a class="contact-card">` block and update it
+  - Icon options: `fas fa-envelope`, `fab fa-linkedin`, `fab fa-github`, `fas fa-phone`, `fab fa-twitter`, `fas fa-globe`
+
+---
+
+## Section 14 — Footer
+**Location:** `app.py` — Lines 694–699
+
+```html
+<p>Built with love using Python & Streamlit · Mann Choudhary 2025</p>
+```
+
+**What to edit:** Just change the text. Update the year when needed.
+
+---
+
+## Section 15 — Floating Action Bar (FAB)
+**Location:** `app.py` — Lines 701 onwards (inside `components.html`)
+
+The FAB has 4 buttons. Here's where each lives in the JS code:
+
+### Theme Toggle Button
+```javascript
+themeBtn.innerHTML = '☀️';                    ← Icon when in dark mode
+themeBtn.setAttribute('data-tip', 'Light Mode'); ← Tooltip text
+// After click (switches to light):
+themeBtn.innerHTML = '🌙';
+themeBtn.setAttribute('data-tip', 'Dark Mode');
+```
+
+### Back to Top Button
+```javascript
+topBtn.innerHTML = '↑';                        ← Arrow character
+topBtn.setAttribute('data-tip', 'Back to Top'); ← Tooltip text
+```
+
+### Resume Download Button
+```javascript
+resumeBtn.innerHTML = '📄';                    ← Icon emoji
+resumeBtn.setAttribute('data-tip', 'Download Resume');
+resumeBtn.download = 'Mann_Choudhary_Resume.pdf'; ← Downloaded filename
+```
+Note: The actual PDF file is read from `assets/resume.pdf` at the top of app.py.
+
+### LinkedIn Button
+```javascript
+liBtn.href = 'https://www.linkedin.com/in/mann-choudhary-data-analyst'; ← Your LinkedIn URL
+liBtn.setAttribute('data-tip', 'LinkedIn');
+```
+
+**To change button position:** find `.fab-bar` in the JS styles:
+```css
+bottom: 28px;   ← Distance from bottom of screen
+right: 24px;    ← Distance from right edge of screen
+```
+
+**To change button size:** find `.fab-btn`:
+```css
+width: 46px;
+height: 46px;
+```
+
+---
+
+## CSS Quick Reference (style.css)
+
+| What you want to change | Search for in style.css |
+|---|---|
+| Page background color | `background-color: #020617` |
+| Default text color | `color: #e2e8f0` |
+| Blue accent color used everywhere | `#3b82f6` |
+| Font families | `@import url(...)` at top of file |
+| Section heading size | `.section-title` |
+| Card background color | `.exp-card`, `.proj-card`, `.cert-card` |
+| Metrics bar grid | `.metrics` |
+| Skill tag pills | `.tag` |
+| Contact card layout | `.contact-grid`, `.contact-card` |
+| Mobile breakpoints | `@media (max-width: 680px)` at bottom |
+
+### Color Palette Used
+
+| Color | Hex | Used for |
+|---|---|---|
+| Page background | `#020617` | Main dark background |
+| Card background | `#0b162c` | All cards |
+| Blue accent | `#3b82f6` | Borders, buttons, highlights |
+| Light blue text | `#60a5fa` | Company names, numbers |
+| Body text | `#cbd5e1` | Bullet points, descriptions |
+| Muted text | `#64748b` | Dates, labels, subtitles |
+| Green | `#10b981` | Open to Work badge, Completed status |
+| Purple | `#a855f7` | Business nodes, Job 2 accent |
+| Orange | `#f59e0b` | AI Tools nodes |
+
+---
+
+## Common Tasks — Quick Reference
+
+| Task | Where to edit |
+|---|---|
+| Change your name | `app.py` → Hero section, `<h1>Mann Choudhary</h1>` |
+| Update resume PDF | Replace `assets/resume.pdf` (keep same filename) |
+| Change profile photo | Replace `assets/profile.png` (keep same filename) |
+| Add a new job | Copy an `exp-card` block in Experience section |
+| Add a new project | Copy a `proj-card` block in Projects section |
+| Add a skill node | Add `Node(...)` and `Edge(...)` in Skills section |
+| Add a skill tag pill | Add a string to the `tags = [...]` list |
+| Add a certification | Copy a `cert-card` block in Certifications section |
+| Change cert status to completed | Change `in-progress` to `completed` in class name |
+| Update contact info | Edit `href` and `contact-value` in Contact section |
+| Remove Open to Work badge | Delete the `open-to-work-badge` div in Hero section |
+| Change navbar links | Edit the `links` array in the Navbar JS block |
+| Change page tab title | Edit `page_title` in `st.set_page_config()` |
+| Change typing animation words | Edit the `texts` array in Typing Animation section |
