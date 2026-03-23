@@ -303,14 +303,21 @@ st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
 st.markdown('<div id="experience" class="section">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Experience</div>', unsafe_allow_html=True)
 
-st.markdown("""
+# Pre-compute logos outside f-string to avoid nested quote syntax errors
+_dakshina_b64 = img_to_b64("assets/dakshina_logo.png")
+if _dakshina_b64:
+    dakshina_logo_html = f'<div class="exp-logo-img"><img src="data:image/png;base64,{_dakshina_b64}" alt="Dakshina"/></div>'
+else:
+    dakshina_logo_html = '<div class="exp-logo" style="background:rgba(168,85,247,0.12);color:#a855f7;border-color:rgba(168,85,247,0.3);">D</div>'
+
+st.markdown(f"""
 <div class="exp-container">
 
   <div class="exp-card">
     <div class="exp-accent-bar"></div>
     <div class="exp-inner">
       <div class="exp-header">
-        <div class="exp-logo">S</div>
+        <div class="exp-logo-img"><img src="https://www.google.com/s2/favicons?domain=saadaa.in&sz=64" alt="SAADAA" style="padding:6px;"/></div>
         <div class="exp-header-text">
           <div class="exp-role">Senior Executive — Data Analyst</div>
           <div class="exp-sub-role">Founder's Office</div>
@@ -357,7 +364,7 @@ st.markdown("""
     <div class="exp-accent-bar" style="background:linear-gradient(to bottom,#a855f7,rgba(168,85,247,0.05));"></div>
     <div class="exp-inner">
       <div class="exp-header">
-        <div class="exp-logo" style="background:rgba(168,85,247,0.12);color:#a855f7;border-color:rgba(168,85,247,0.3);">D</div>
+        {dakshina_logo_html}
         <div class="exp-header-text">
           <div class="exp-role">Data Entry Operator / MIS Analyst</div>
           <div class="exp-sub-role">Operations &amp; Reporting</div>
