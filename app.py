@@ -22,7 +22,6 @@ def load_css():
 
 load_css()
 
-# Helper — convert any image file to base64 for embedding in HTML
 import os
 
 def img_to_b64(path):
@@ -68,7 +67,7 @@ components.html("""
 </script>
 """, height=80)
 
-# ── NAVBAR — injected into parent document so it stays fixed while scrolling ──
+# ── NAVBAR ────────────────────────────────────────────────────────────────────
 components.html("""
 <style>
   .fixed-navbar {
@@ -105,10 +104,7 @@ components.html("""
 <script>
   function injectNavbar() {
     var parentDoc = window.parent.document;
-
     if (parentDoc.querySelector('.fixed-navbar')) return;
-
-    // Inject styles
     var style = parentDoc.createElement('style');
     style.textContent = `
       .fixed-navbar {
@@ -143,11 +139,8 @@ components.html("""
       }
     `;
     parentDoc.head.appendChild(style);
-
-    // Create navbar
     var nav = parentDoc.createElement('div');
     nav.className = 'fixed-navbar';
-
     var links = [
       ['About','about'],
       ['Experience','experience'],
@@ -156,28 +149,20 @@ components.html("""
       ['Certifications','certifications'],
       ['Contact','contact']
     ];
-
     links.forEach(function(item) {
       var a = parentDoc.createElement('a');
       a.textContent = item[0];
       a.addEventListener('click', function() {
         var target = parentDoc.getElementById(item[1]);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
       });
       nav.appendChild(a);
     });
-
     parentDoc.body.prepend(nav);
-
-    // Push content down so navbar doesn't cover hero
     var appView = parentDoc.querySelector('[data-testid="stAppViewContainer"]')
                   || parentDoc.querySelector('.main');
     if (appView) appView.style.paddingTop = '52px';
   }
-
-  // Run immediately and also after a short delay (Streamlit loads async)
   injectNavbar();
   setTimeout(injectNavbar, 500);
   setTimeout(injectNavbar, 1500);
@@ -187,21 +172,15 @@ components.html("""
 # ── HERO ─────────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="hero">
-
-  <!-- FIX 6: Open to Work badge -->
   <div class="open-to-work-badge">
     <span class="otw-dot"></span> Open to Work
   </div>
-
   <h1>Mann Choudhary</h1>
   <div class="hero-subtitle">Data Analyst &nbsp;|&nbsp; MIS Analyst &nbsp;|&nbsp; Business Analyst</div>
   <div class="hero-tagline">Building data systems, automations &amp; insights that drive real decisions.</div>
-
-  <!-- FIX 5: location tag -->
   <div class="location-tag">
     <i class="fas fa-map-marker-alt"></i>&nbsp; Jaipur, India &nbsp;&bull;&nbsp; Open to Relocate
   </div>
-
 </div>
 """, unsafe_allow_html=True)
 
@@ -213,16 +192,16 @@ st.markdown("""
     <p>ERP Modules Built</p>
   </div>
   <div class="metric-item">
-    <h3>1000+</h3>
-    <p>Orders Managed / Day</p>
-  </div>
-  <div class="metric-item">
     <h3>20+ Hrs</h3>
     <p>Saved Weekly via Automation</p>
   </div>
   <div class="metric-item">
     <h3>4+ Yrs</h3>
     <p>Data Domain Experience</p>
+  </div>
+  <div class="metric-item">
+    <h3>5+</h3>
+    <p>Dashboards Shipped</p>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -288,22 +267,19 @@ with col1:
     st.image("assets/profile.png", width=220)
 with col2:
     st.markdown("""
-Hi, I'm <b>Mann Choudhary</b> — a Data Analyst and builder based in Jaipur, passionate about turning
-raw data into systems, insights, and decisions that actually move the needle.
+Hi, I'm <b>Mann Choudhary</b> — a Data Analyst based in Jaipur who builds data systems people actually rely on, not dashboards that get one screenshot and disappear.
 
-<p>With <b>4+ years of experience</b> across e-commerce, import/export, and fashion-tech startups, I work
-at the intersection of data and operations — building tools people actually use every day, not just
-dashboards that get screenshots and forgotten.</p>
+<p>With <b>4+ years of experience</b> spanning e-commerce, import/export, and fashion-tech, I work at the intersection of data and operations. My edge is that I don't just analyse — I build end-to-end: from raw data ingestion and automated pipelines all the way to the dashboard a founder opens every morning.</p>
 
 <ul class="abt-points">
-  <li><b>Analytics &amp; Automation</b> — Python (Pandas, NumPy, Prophet, XGBoost), SQL, Google Apps Script; built a <b>6-module ERP</b> on Google Sheets saving 20+ hrs/week</li>
-  <li><b>Visualization &amp; Reporting</b> — Power BI, Looker Studio, Streamlit; multi-platform e-commerce reporting across four marketplaces</li>
-  <li><b>Data Platforms &amp; AI</b> — BigQuery, GCP, MySQL; prompt engineering and AI-assisted development with Claude &amp; Gemini</li>
+  <li><b>Analytics &amp; Automation</b> — Python (Pandas, NumPy, Prophet, XGBoost), SQL, Google Apps Script; engineered a <b>6-module ERP</b> on Google Sheets that eliminated 20+ hours of manual work per week across the entire ops team.</li>
+  <li><b>Visualization &amp; Reporting</b> — Power BI, Looker Studio, Streamlit; designed multi-platform e-commerce reporting aggregating data from four marketplaces into one live view.</li>
+  <li><b>Data Platforms &amp; AI</b> — BigQuery, GCP, MySQL; prompt engineering and AI-assisted development with Claude &amp; Gemini to accelerate delivery and problem-solving.</li>
 </ul>
 
-<p>Currently at <b>Baaori Bazaar</b> (Founder's Office), I lead a 2-person analyst team, built the company's
-entire data infrastructure from scratch, and manage 1,000+ daily orders across four marketplaces.
-I'm actively looking for Data Analyst, MIS Analyst, or Business Analyst roles in Jaipur, Noida, or Pune.</p>
+<p>At <b>Baaori Bazaar</b> (Founder's Office), I built the company's entire data infrastructure from the ground up — QC workflows, production tracking, inventory management, and order operations — while leading a 2-person analyst team. Before that, at <b>SAADAA</b>, I cut reporting effort by 40% through automated pipelines and built the dashboards leadership used to run weekly business reviews.</p>
+
+<p>I'm actively looking for <b>Data Analyst, MIS Analyst, or Business Analyst</b> roles in Jaipur, Noida, or Pune — ideally somewhere I can keep building things that matter.</p>
 """, unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
@@ -313,7 +289,6 @@ st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
 st.markdown('<div id="experience" class="section">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Experience</div>', unsafe_allow_html=True)
 
-# Pre-compute logos outside f-string to avoid nested quote syntax errors
 _dakshina_b64 = img_to_b64("assets/dakshina_logo.png")
 if _dakshina_b64:
     dakshina_logo_html = f'<div class="exp-logo-img"><img src="data:image/png;base64,{_dakshina_b64}" alt="Dakshina"/></div>'
@@ -323,7 +298,7 @@ else:
 st.markdown(f"""
 <div class="exp-container">
 
-  <!-- Baaori Bazaar — Current Role -->
+  <!-- Baaori Bazaar -->
   <div class="exp-card">
     <div class="exp-accent-bar" style="background:linear-gradient(to bottom,#10b981,rgba(16,185,129,0.05));"></div>
     <div class="exp-inner">
@@ -352,13 +327,13 @@ st.markdown(f"""
           <span class="chip-label">Saved Weekly</span>
         </div>
         <div class="exp-impact-chip" style="border-color:rgba(16,185,129,0.3);background:rgba(16,185,129,0.07);">
-          <span class="chip-num" style="color:#34d399;">1000+</span>
-          <span class="chip-label">Orders/Day</span>
+          <span class="chip-num" style="color:#34d399;">2</span>
+          <span class="chip-label">Analysts Led</span>
         </div>
       </div>
       <ul class="exp-points">
         <li>Built a <b>6-module ERP system</b> on Google Sheets + Apps Script covering QC management, production tracking, raw materials, and order management — saving 20+ hours per week.</li>
-        <li>Designed and own end-to-end <b>e-commerce reporting</b> across four platforms, processing <b>1,000+ daily orders</b> with automated upsert and dispatch tracking.</li>
+        <li>Designed and own end-to-end <b>e-commerce reporting</b> across four platforms with automated upsert and dispatch tracking.</li>
         <li>Created a <b>BOM (Bill of Materials)</b> system integrated with raw material stock, Ward-wise inventory tracking, and ROL alerts to prevent production stoppages.</li>
         <li>Built a Production WebApp tracking batch flow through RECEIVED → CUTTING → STITCHING → IRONING → DONE with tailor/cutting master assignments and split-batch logic.</li>
         <li>Lead and mentor <b>2 junior analysts</b>, defining data workflows and quality standards across the team.</li>
@@ -418,6 +393,7 @@ st.markdown(f"""
     </div>
   </div>
 
+  <!-- Dakshina -->
   <div class="exp-card">
     <div class="exp-accent-bar" style="background:linear-gradient(to bottom,#a855f7,rgba(168,85,247,0.05));"></div>
     <div class="exp-inner">
@@ -470,7 +446,7 @@ st.markdown(f"""
 st.markdown('</div>', unsafe_allow_html=True)
 st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
 
-# ── PROJECTS — 6-card grid with click-to-expand modal ────────────────────────
+# ── PROJECTS ─────────────────────────────────────────────────────────────────
 st.markdown('<div id="projects" class="section">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Projects</div>', unsafe_allow_html=True)
 st.markdown('<p style="text-align:center;color:#64748b;font-size:14px;margin:-10px 0 28px;">Click any card to explore details</p>', unsafe_allow_html=True)
@@ -485,7 +461,6 @@ sd_src   = f"data:image/png;base64,{sd_b64}"   if sd_b64   else ""
 sql_src  = f"data:image/png;base64,{sql_b64}"  if sql_b64  else ""
 case_src = f"data:application/pdf;base64,{case_b64}" if case_b64 else ""
 
-# ── Card HTML only — no <script> tags (st.markdown strips them) ──
 st.markdown(f"""
 <style>
 .proj-grid-6 {{
@@ -620,18 +595,6 @@ st.markdown(f"""
   </div>
 
   <div class="pcard" data-proj="4">
-    <div class="pcard-banner" style="background:linear-gradient(135deg,#050d1a,#061424);">
-      <i class="fab fa-linkedin" style="color:#0ea5e9;"></i>
-    </div>
-    <div class="pcard-body">
-      <div class="pcard-tags"><span>Python</span><span>Selenium</span><span>Gmail API</span><span>Automation</span></div>
-      <div class="pcard-title">LinkedIn Job Application Bot</div>
-      <div class="pcard-desc">Selenium bot that scrapes job posts, extracts recruiter emails, and auto-sends personalised applications.</div>
-      <div class="pcard-hint"><i class="fas fa-hand-pointer"></i> Click to explore</div>
-    </div>
-  </div>
-
-  <div class="pcard" data-proj="5">
     <div class="pcard-banner" style="background:linear-gradient(135deg,#0f0a20,#1a0d30);">
       {"<img src='" + sql_src + "' alt='SQL Preview'/>" if sql_src else '<i class="fas fa-database" style="color:#a855f7;"></i>'}
     </div>
@@ -646,7 +609,7 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# ── Modal + JS injected into parent document via components.html ──────────────
+# ── Modal + JS ────────────────────────────────────────────────────────────────
 _case_dl = (
     f'<a href="{case_src}" download="Mann_SQL_Case_Study.pdf" '
     'class="pmodal-btn secondary" style="display:inline-flex;align-items:center;gap:7px;'
@@ -660,7 +623,6 @@ components.html(f"""
 (function() {{
   var parentDoc = window.parent.document;
 
-  // ── Inject modal styles into parent ──────────────────────────────────────
   if (!parentDoc.getElementById('pmodal-styles')) {{
     var s = parentDoc.createElement('style');
     s.id = 'pmodal-styles';
@@ -751,6 +713,14 @@ components.html(f"""
         font-size:13.5px; color:#cbd5e1;
         line-height:1.75; margin-bottom:16px;
       }}
+      .pmodal-section-label {{
+        font-size:10px;
+        text-transform:uppercase;
+        letter-spacing:1.2px;
+        color:#475569;
+        font-weight:600;
+        margin: 18px 0 8px;
+      }}
       .pmodal-points {{
         list-style:none; padding:0; margin:0 0 20px;
         display:flex; flex-direction:column; gap:9px;
@@ -760,6 +730,7 @@ components.html(f"""
         padding-left:18px; position:relative; line-height:1.6;
       }}
       .pmodal-points li::before {{ content:'▸'; position:absolute; left:0; color:#3b82f6; }}
+      .pmodal-points li b {{ color:#cbd5e1; }}
       .pmodal-actions {{ display:flex; gap:10px; flex-wrap:wrap; }}
       .pmodal-btn-primary {{
         display:inline-flex; align-items:center; gap:7px;
@@ -772,11 +743,51 @@ components.html(f"""
         cursor:pointer; transition:background 0.2s;
       }}
       .pmodal-btn-primary:hover {{ background:#2563eb; }}
+      .pmodal-highlight-box {{
+        background: rgba(16,185,129,0.06);
+        border: 1px solid rgba(16,185,129,0.2);
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
+        font-size: 13px;
+        color: #6ee7b7;
+        line-height: 1.65;
+      }}
+      .pmodal-highlight-box strong {{
+        color: #34d399;
+        font-weight: 700;
+      }}
+      .pmodal-module-grid {{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 16px;
+      }}
+      .pmodal-module-card {{
+        background: rgba(59,130,246,0.05);
+        border: 1px solid rgba(59,130,246,0.15);
+        border-radius: 10px;
+        padding: 12px 14px;
+      }}
+      .pmodal-module-card .mod-title {{
+        font-family: 'Syne', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        color: #60a5fa;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }}
+      .pmodal-module-card .mod-desc {{
+        font-size: 11.5px;
+        color: #64748b;
+        line-height: 1.55;
+      }}
     `;
     parentDoc.head.appendChild(s);
   }}
 
-  // ── Inject modal HTML into parent ─────────────────────────────────────────
   if (!parentDoc.getElementById('projModal')) {{
     var backdrop = parentDoc.createElement('div');
     backdrop.className = 'pmodal-backdrop';
@@ -794,21 +805,16 @@ components.html(f"""
         <div class="pmodal-body">
           <div class="pmodal-tags" id="mTags"></div>
           <div class="pmodal-divider"></div>
-          <div class="pmodal-desc" id="mDesc"></div>
-          <ul class="pmodal-points" id="mPoints"></ul>
+          <div id="mContent"></div>
           <div class="pmodal-actions" id="mActions"></div>
         </div>
       </div>
     `;
     parentDoc.body.appendChild(backdrop);
-
-    // Close on backdrop click
     backdrop.addEventListener('click', function(e) {{
       if (e.target === backdrop) closeModal();
     }});
-    // Close button
     parentDoc.getElementById('pmodalClose').addEventListener('click', closeModal);
-    // Escape key
     parentDoc.addEventListener('keydown', function(e) {{
       if (e.key === 'Escape') closeModal();
     }});
@@ -820,7 +826,6 @@ components.html(f"""
     parentDoc.body.style.overflow = '';
   }}
 
-  // ── Project data ──────────────────────────────────────────────────────────
   var projects = [
     {{
       icon: '<i class="fas fa-chart-line" style="color:#3b82f6;font-size:28px;"></i>',
@@ -828,13 +833,15 @@ components.html(f"""
       title: 'Demand Forecasting Engine',
       subtitle: 'Python · Prophet · Machine Learning · Streamlit',
       tags: ['Python','Prophet','SARIMA','XGBoost','Streamlit','Pandas','NumPy'],
-      desc: 'A hybrid SKU-level demand forecasting engine combining SARIMA, Facebook Prophet, and XGBoost to generate accurate multi-horizon forecasts — deployed as a live interactive Streamlit web app.',
-      points: [
-        'Compared SARIMA, Prophet, and XGBoost across multiple SKUs to select best-fit model per product',
-        'Built an interactive Streamlit UI where users can select SKU, forecast horizon, and model type',
-        'Visualised forecast vs actuals with confidence intervals and error metrics (MAE, RMSE)',
-        'Deployed on Streamlit Cloud — accessible without any local setup'
-      ],
+      content: `
+        <div class="pmodal-desc">A hybrid SKU-level demand forecasting engine combining SARIMA, Facebook Prophet, and XGBoost to generate accurate multi-horizon forecasts — deployed as a live interactive Streamlit web app.</div>
+        <ul class="pmodal-points">
+          <li>Compared SARIMA, Prophet, and XGBoost across multiple SKUs to select best-fit model per product</li>
+          <li>Built an interactive Streamlit UI where users can select SKU, forecast horizon, and model type</li>
+          <li>Visualised forecast vs actuals with confidence intervals and error metrics (MAE, RMSE)</li>
+          <li>Deployed on Streamlit Cloud — accessible without any local setup</li>
+        </ul>
+      `,
       actionHtml: '<a href="https://demand-forecasting-engine-o22shix3vgbi5jgrvi4abg.streamlit.app/" target="_blank" class="pmodal-btn-primary"><i class="fas fa-external-link-alt"></i> View Live App</a>'
     }},
     {{
@@ -843,30 +850,72 @@ components.html(f"""
       title: 'Sales Analytics Dashboard',
       subtitle: 'Power BI · DAX · Power Query · KPI Tracking',
       tags: ['Power BI','Power Query','DAX','KPI','Data Modelling','Excel'],
-      desc: 'An interactive Power BI dashboard giving business leadership a real-time view of sales performance, regional trends, and return rates — replacing manual Excel reports with a live filterable dashboard.',
-      points: [
-        'Cleaned and transformed raw sales data using Power Query — handled nulls, type mismatches, and duplicates',
-        'Built a star-schema data model connecting sales, product, region, and time tables',
-        'Created DAX measures for YoY growth, running totals, return rate %, and region-wise contribution',
-        'Designed an interactive layout with slicers for date range, product category, and region'
-      ],
+      content: `
+        <div class="pmodal-desc">An interactive Power BI dashboard giving business leadership a real-time view of sales performance, regional trends, and return rates — replacing manual Excel reports with a live filterable dashboard.</div>
+        <ul class="pmodal-points">
+          <li>Cleaned and transformed raw sales data using Power Query — handled nulls, type mismatches, and duplicates</li>
+          <li>Built a star-schema data model connecting sales, product, region, and time tables</li>
+          <li>Created DAX measures for YoY growth, running totals, return rate %, and region-wise contribution</li>
+          <li>Designed an interactive layout with slicers for date range, product category, and region</li>
+        </ul>
+      `,
       actionHtml: ''
     }},
     {{
       icon: '<i class="fas fa-sitemap" style="color:#10b981;font-size:28px;"></i>',
       iconBg: 'rgba(16,185,129,0.12)',
       title: 'Baaori Bazaar ERP System',
-      subtitle: 'Google Apps Script · Google Sheets · 6 Modules',
-      tags: ['Google Apps Script','Google Sheets','ERP','BOM','QC','Automation','WebApp'],
-      desc: 'A fully custom 6-module ERP built on Google Sheets + Apps Script for a fashion brand — replacing WhatsApp-based operations with structured automated workflows across QC, production, inventory, and orders.',
-      points: [
-        'QC Module: Raw Fabric QC, Production QC, Pre-Dispatch QC workflows with pass/fail tracking',
-        'Production WebApp: Batch flow RECEIVED → CUTTING → STITCHING → IRONING → DONE with tailor assignments and split-batch logic',
-        'BOM System: Bill of Materials linked to raw material stock with Ward-wise inventory and automatic ROL alerts',
-        'Orders WebApp: Shopify import, priority-based stock allocation, and dispatch sheet joins',
-        'Bridge.gs connector linking BOM to Ward2/Ward3 stock in real time',
-        'Saved 20+ hours per week across the entire operations team'
-      ],
+      subtitle: 'Google Apps Script · Google Sheets · 6 Modules · Built from Scratch',
+      tags: ['Google Apps Script','Google Sheets','ERP','BOM','QC','Automation','WebApp','Inventory'],
+      content: `
+        <div class="pmodal-highlight-box">
+          <strong>The problem:</strong> The entire company ran on WhatsApp messages and scattered spreadsheets. There was no system to track what fabric passed QC, which batches were in production, what stock was available, or which orders were ready to dispatch. I built one — from scratch.
+        </div>
+        <div class="pmodal-desc">
+          A fully custom, 6-module ERP system built on Google Sheets + Google Apps Script for a growing fashion brand. This replaced informal, error-prone WhatsApp-based workflows with structured, automated systems that the entire operations team now depends on daily — saving <strong style="color:#34d399;">20+ hours per week</strong> across the business.
+        </div>
+        <div class="pmodal-section-label">The 6 Modules</div>
+        <div class="pmodal-module-grid">
+          <div class="pmodal-module-card">
+            <div class="mod-title"><i class="fas fa-search-plus"></i> QC Management</div>
+            <div class="mod-desc">Three-stage quality control: Raw Fabric QC, Production QC, and Pre-Dispatch QC. Each stage has its own pass/fail tracking, rejection logging, and status dashboard — so nothing slips through unchecked.</div>
+          </div>
+          <div class="pmodal-module-card">
+            <div class="mod-title"><i class="fas fa-industry"></i> Production Tracker</div>
+            <div class="mod-desc">A WebApp that tracks every batch through 5 production stages: RECEIVED → CUTTING → STITCHING → IRONING → DONE. Supports tailor & cutting master assignments, split-batch logic, and live stage visibility.</div>
+          </div>
+          <div class="pmodal-module-card">
+            <div class="mod-title"><i class="fas fa-boxes"></i> BOM & Raw Materials</div>
+            <div class="mod-desc">A Bill of Materials system linked directly to raw material stock. When a production batch is created, the BOM auto-calculates fabric consumption, deducts from live inventory, and triggers ROL (Reorder Level) alerts before stock runs out.</div>
+          </div>
+          <div class="pmodal-module-card">
+            <div class="mod-title"><i class="fas fa-warehouse"></i> Inventory (Ward System)</div>
+            <div class="mod-desc">Ward-wise inventory tracking across multiple storage locations. Stock movements — inward, outward, transfers — are logged in real time and always reconciled against the BOM consumption records.</div>
+          </div>
+          <div class="pmodal-module-card">
+            <div class="mod-title"><i class="fas fa-shopping-cart"></i> Order Management</div>
+            <div class="mod-desc">A WebApp that imports Shopify orders, runs priority-based stock allocation logic, and generates dispatch-ready picking sheets — replacing a fully manual process that previously took hours each day.</div>
+          </div>
+          <div class="pmodal-module-card">
+            <div class="mod-title"><i class="fas fa-link"></i> Cross-Module Sync</div>
+            <div class="mod-desc">All modules are connected. A finished production batch automatically updates inventory. An allocated order pulls from live stock. BOM consumption reflects immediately in raw material levels. Nothing is siloed.</div>
+          </div>
+        </div>
+        <div class="pmodal-section-label">What this replaced</div>
+        <ul class="pmodal-points">
+          <li><b>Before:</b> QC status tracked in WhatsApp groups — no history, no accountability</li>
+          <li><b>Before:</b> Production stages tracked in memory or verbal updates — batches were lost, delays went unnoticed</li>
+          <li><b>Before:</b> Raw material stock counted manually — no reorder alerts, frequent production stoppages</li>
+          <li><b>Before:</b> Orders managed in Excel files sent over WhatsApp — duplicate allocations, missed dispatches</li>
+        </ul>
+        <div class="pmodal-section-label">Impact</div>
+        <ul class="pmodal-points">
+          <li>Saved <b>20+ hours per week</b> across the operations team by eliminating manual tracking and WhatsApp coordination</li>
+          <li>Zero production stoppages due to raw material stockouts since ROL alerts went live</li>
+          <li>Full traceability from fabric purchase to finished order — something the company never had before</li>
+          <li>The entire ops team (production, QC, warehouse, dispatch) now works from one connected system</li>
+        </ul>
+      `,
       actionHtml: ''
     }},
     {{
@@ -875,31 +924,17 @@ components.html(f"""
       title: 'Multi-Platform E-commerce Reporting',
       subtitle: 'Google Apps Script · Shopify · 4 Marketplaces',
       tags: ['Apps Script','Shopify','Looker Studio','SQL','Reporting','Automation'],
-      desc: 'Automated reporting that aggregates 1,000+ daily orders from four platforms (Shopify, Amazon, Flipkart, Myntra) into one unified dashboard — eliminating all manual download-and-paste work.',
-      points: [
-        'Built platform-specific parsers handling different date formats, ID types, and schemas per marketplace',
-        'Implemented upsert logic using order line ID as the key — no duplicates on re-run',
-        'Fixed scientific notation ID issue that was corrupting Flipkart order IDs in Google Sheets',
-        'Automated dispatch sheet joins to flag shipped vs pending orders per platform',
-        'Rebuilt PDF/email report export using server-side HTML generation',
-        'Aggregated daily volume, revenue, returns, and fulfilment rate into a Looker Studio dashboard'
-      ],
-      actionHtml: ''
-    }},
-    {{
-      icon: '<i class="fab fa-linkedin" style="color:#0ea5e9;font-size:28px;"></i>',
-      iconBg: 'rgba(14,165,233,0.12)',
-      title: 'LinkedIn Job Application Bot',
-      subtitle: 'Python · Selenium · Gmail API · Automation',
-      tags: ['Python','Selenium','Gmail API','Web Scraping','Automation','SMTP'],
-      desc: 'A Python bot that searches LinkedIn for matching job posts, extracts recruiter emails from listings, and auto-sends personalised application emails with a resume attachment — fully hands-free.',
-      points: [
-        'Used Selenium WebDriver to log in, search by role/location, and navigate job listing pages',
-        'Extracted recruiter names and contact emails from job descriptions and poster profiles',
-        'Integrated Gmail API (OAuth2) to send personalised emails with resume PDF attached',
-        'Added delay and randomisation logic to avoid rate limiting and bot detection',
-        'Used to apply to Redcliffe Labs, Beinex, Airtel, and 10+ other companies'
-      ],
+      content: `
+        <div class="pmodal-desc">Automated reporting that aggregates daily orders from four platforms (Shopify, Amazon, Flipkart, Myntra) into one unified dashboard — eliminating all manual download-and-paste work.</div>
+        <ul class="pmodal-points">
+          <li>Built platform-specific parsers handling different date formats, ID types, and schemas per marketplace</li>
+          <li>Implemented upsert logic using order line ID as the key — no duplicates on re-run</li>
+          <li>Fixed scientific notation ID issue that was corrupting Flipkart order IDs in Google Sheets</li>
+          <li>Automated dispatch sheet joins to flag shipped vs pending orders per platform</li>
+          <li>Rebuilt PDF/email report export using server-side HTML generation</li>
+          <li>Aggregated daily volume, revenue, returns, and fulfilment rate into a Looker Studio dashboard</li>
+        </ul>
+      `,
       actionHtml: ''
     }},
     {{
@@ -908,18 +943,19 @@ components.html(f"""
       title: 'Business Analysis Case Study',
       subtitle: 'SQL · BigQuery · ERD · Executive Storytelling',
       tags: ['SQL','BigQuery','KPI Analysis','ERD','Business Analysis','Slide Deck'],
-      desc: 'An end-to-end SQL business analysis project covering data extraction, transformation, KPI analysis, trend identification, and C-suite storytelling — with a full ERD and downloadable slide deck.',
-      points: [
-        'Wrote complex SQL queries with multi-table joins, CTEs, window functions, and aggregations in BigQuery',
-        'Designed a normalised Entity Relationship Diagram (ERD) documenting all table relationships',
-        'Identified top-performing categories, seasonal trends, and underperforming product segments',
-        'Built a slide deck with visual charts and narrative suitable for executive presentation'
-      ],
+      content: `
+        <div class="pmodal-desc">An end-to-end SQL business analysis project covering data extraction, transformation, KPI analysis, trend identification, and C-suite storytelling — with a full ERD and downloadable slide deck.</div>
+        <ul class="pmodal-points">
+          <li>Wrote complex SQL queries with multi-table joins, CTEs, window functions, and aggregations in BigQuery</li>
+          <li>Designed a normalised Entity Relationship Diagram (ERD) documenting all table relationships</li>
+          <li>Identified top-performing categories, seasonal trends, and underperforming product segments</li>
+          <li>Built a slide deck with visual charts and narrative suitable for executive presentation</li>
+        </ul>
+      `,
       actionHtml: '{_case_dl}'
     }}
   ];
 
-  // ── Wire up card clicks in parent document ────────────────────────────────
   function attachClicks() {{
     var cards = parentDoc.querySelectorAll('.pcard[data-proj]');
     cards.forEach(function(card) {{
@@ -941,10 +977,7 @@ components.html(f"""
     parentDoc.getElementById('mTags').innerHTML = p.tags.map(function(t) {{
       return '<span>' + t + '</span>';
     }}).join('');
-    parentDoc.getElementById('mDesc').textContent = p.desc;
-    parentDoc.getElementById('mPoints').innerHTML = p.points.map(function(pt) {{
-      return '<li>' + pt + '</li>';
-    }}).join('');
+    parentDoc.getElementById('mContent').innerHTML = p.content;
     parentDoc.getElementById('mActions').innerHTML = p.actionHtml;
     parentDoc.getElementById('projModal').classList.add('open');
     parentDoc.body.style.overflow = 'hidden';
@@ -960,7 +993,7 @@ components.html(f"""
 st.markdown('</div>', unsafe_allow_html=True)
 st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
 
-# ── SKILLS — EXACT original agraph ───────────────────────────────────────────
+# ── SKILLS ───────────────────────────────────────────────────────────────────
 st.markdown('<div id="skills" class="section">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Skills</div>', unsafe_allow_html=True)
 
@@ -1033,7 +1066,6 @@ config = Config(
 )
 agraph(nodes=nodes, edges=edges, config=config)
 
-# SKILL TAGS
 st.markdown('<div class="section-title" style="font-size:24px; margin-top:30px;">Core Skill Stack</div>', unsafe_allow_html=True)
 
 tags = [
@@ -1063,7 +1095,6 @@ st.markdown('<div class="section-title">Certifications</div>', unsafe_allow_html
 
 st.markdown("""
 <div class="cert-grid">
-
   <div class="cert-card">
     <div class="cert-icon" style="color:#0078d4;"><i class="fab fa-python"></i></div>
     <div class="cert-body">
@@ -1072,7 +1103,6 @@ st.markdown("""
       <div class="cert-status completed">Completed</div>
     </div>
   </div>
-
   <div class="cert-card">
     <div class="cert-icon" style="color:#f59e0b;"><i class="fas fa-database"></i></div>
     <div class="cert-body">
@@ -1081,7 +1111,6 @@ st.markdown("""
       <div class="cert-status completed">Completed</div>
     </div>
   </div>
-
   <div class="cert-card">
     <div class="cert-icon" style="color:#10b981;"><i class="fas fa-chart-bar"></i></div>
     <div class="cert-body">
@@ -1090,7 +1119,6 @@ st.markdown("""
       <div class="cert-status completed">Completed</div>
     </div>
   </div>
-
   <div class="cert-card">
     <div class="cert-icon" style="color:#a855f7;"><i class="fas fa-brain"></i></div>
     <div class="cert-body">
@@ -1099,11 +1127,7 @@ st.markdown("""
       <div class="cert-status in-progress">In Progress</div>
     </div>
   </div>
-
 </div>
-
-<p style="text-align:center; color:#475569; font-size:13px; margin-top:18px;">
-</p>
 """, unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
@@ -1121,7 +1145,6 @@ st.markdown("""
   <i class="fas fa-map-marker-alt" style="color:#3b82f6;"></i>
   &nbsp;Jaipur, Rajasthan, India &nbsp;&bull;&nbsp; Open to Remote &amp; Hybrid
 </p>
-
 <div class="contact-grid">
   <a href="mailto:manndimansee@gmail.com" class="contact-card">
     <i class="fas fa-envelope"></i>
@@ -1163,7 +1186,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# FLOATING ACTION BAR — theme toggle, back to top, resume download, LinkedIn
+# ── FLOATING ACTION BAR ───────────────────────────────────────────────────────
 components.html(f"""
 <script>
 var resumeB64 = "{b64_pdf}";
@@ -1226,216 +1249,40 @@ function injectFAB() {{
       transition: opacity 0.2s;
     }}
     .fab-btn:hover::before {{ opacity: 1; }}
-
-    /* ── LIGHT THEME — full coverage ── */
-
-    /* Page background + default text */
+    body.light-theme .fixed-navbar {{
+      background: rgba(241,245,249,0.97) !important;
+      border-bottom: 1px solid rgba(59,130,246,0.2) !important;
+    }}
+    body.light-theme .fixed-navbar a {{ color: #475569 !important; }}
+    body.light-theme .fixed-navbar a:hover {{ color: #2563eb !important; border-bottom-color: #2563eb !important; }}
     body.light-theme,
     body.light-theme [data-testid="stAppViewContainer"],
     body.light-theme [data-testid="stApp"],
-    body.light-theme [data-testid="stVerticalBlock"],
-    body.light-theme [data-testid="stMarkdownContainer"],
     body.light-theme .block-container {{
       background-color: #f1f5f9 !important;
       color: #0f172a !important;
     }}
-
-    /* All plain text elements */
-    body.light-theme p,
-    body.light-theme li,
-    body.light-theme span,
-    body.light-theme div,
-    body.light-theme label {{
-      color: #1e293b !important;
-    }}
-
-    /* Navbar */
-    body.light-theme .fixed-navbar {{
-      background: rgba(241,245,249,0.97) !important;
-      border-bottom: 1px solid rgba(59,130,246,0.2) !important;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08) !important;
-    }}
-    body.light-theme .fixed-navbar a {{ color: #475569 !important; }}
-    body.light-theme .fixed-navbar a:hover {{ color: #2563eb !important; border-bottom-color: #2563eb !important; }}
-
-    /* Hero */
-    body.light-theme .hero h1 {{
-      background: linear-gradient(135deg, #0f172a 30%, #2563eb 100%) !important;
-      -webkit-background-clip: text !important;
-      background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-    }}
-    body.light-theme .hero-subtitle {{ color: #334155 !important; }}
-    body.light-theme .hero-tagline  {{ color: #64748b !important; }}
-    body.light-theme .location-tag  {{ color: #64748b !important; }}
-
-    /* Open to Work badge — keep green, just slightly adjust */
-    body.light-theme .open-to-work-badge {{
-      background: rgba(16,185,129,0.08) !important;
-      color: #059669 !important;
-    }}
-
-    /* Metrics bar */
-    body.light-theme .metrics {{
-      background: #ffffff !important;
-      border-color: rgba(59,130,246,0.15) !important;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06) !important;
-    }}
-    body.light-theme .metric-item {{ border-right-color: rgba(59,130,246,0.1) !important; }}
+    body.light-theme .metrics {{ background: #ffffff !important; border-color: rgba(59,130,246,0.15) !important; }}
     body.light-theme .metric-item h3 {{ color: #2563eb !important; }}
     body.light-theme .metric-item p  {{ color: #64748b !important; }}
-
-    /* Social icon buttons */
-    body.light-theme .social-icons a {{
-      color: #475569 !important;
-      border-color: #cbd5e1 !important;
-      background: #ffffff !important;
-    }}
-    body.light-theme .social-icons a:hover {{
-      color: #2563eb !important;
-      border-color: #2563eb !important;
-    }}
-
-    /* Hero buttons */
-    body.light-theme .hero-btn.secondary {{
-      border-color: #cbd5e1 !important;
-      color: #334155 !important;
-    }}
-    body.light-theme .hero-btn.secondary:hover {{
-      border-color: #2563eb !important;
-      color: #2563eb !important;
-    }}
-
-    /* Section titles */
-    body.light-theme .section-title {{ color: #0f172a !important; }}
-    body.light-theme .section-divider {{
-      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent) !important;
-    }}
-
-    /* About text */
-    body.light-theme .abt-points li {{ color: #334155 !important; }}
-
-    /* Experience cards */
-    body.light-theme .exp-card {{
-      background: #ffffff !important;
-      border-color: rgba(59,130,246,0.15) !important;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06) !important;
-    }}
-    body.light-theme .exp-card:hover {{
-      box-shadow: 0 8px 28px rgba(59,130,246,0.14) !important;
-    }}
-    body.light-theme .exp-role      {{ color: #0f172a !important; }}
-    body.light-theme .exp-sub-role  {{ color: #64748b !important; }}
-    body.light-theme .exp-date      {{ color: #475569 !important; }}
-    body.light-theme .exp-duration  {{ color: #94a3b8 !important; }}
+    body.light-theme .exp-card {{ background: #ffffff !important; border-color: rgba(59,130,246,0.15) !important; }}
+    body.light-theme .exp-role {{ color: #0f172a !important; }}
     body.light-theme .exp-points li {{ color: #334155 !important; }}
-    body.light-theme .exp-impact-chip {{
-      background: rgba(37,99,235,0.06) !important;
-      border-color: rgba(37,99,235,0.18) !important;
-    }}
-    body.light-theme .chip-num   {{ color: #2563eb !important; }}
-    body.light-theme .chip-label {{ color: #64748b !important; }}
-    body.light-theme .exp-tools-row {{
-      border-top-color: rgba(59,130,246,0.12) !important;
-    }}
-    body.light-theme .exp-tools-row span {{
-      background: rgba(37,99,235,0.06) !important;
-      border-color: rgba(37,99,235,0.18) !important;
-      color: #2563eb !important;
-    }}
-    body.light-theme .exp-type-badge {{
-      background: rgba(37,99,235,0.07) !important;
-      border-color: rgba(37,99,235,0.2) !important;
-      color: #2563eb !important;
-    }}
-    body.light-theme .exp-logo {{
-      background: rgba(37,99,235,0.08) !important;
-      border-color: rgba(37,99,235,0.2) !important;
-      color: #2563eb !important;
-    }}
-
-    /* Project cards */
-    body.light-theme .proj-card {{
-      background: #ffffff !important;
-      border-color: rgba(59,130,246,0.15) !important;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06) !important;
-    }}
-    body.light-theme .proj-title {{ color: #0f172a !important; }}
-    body.light-theme .proj-desc  {{ color: #475569 !important; }}
-    body.light-theme .proj-tags span {{
-      background: rgba(37,99,235,0.07) !important;
-      border-color: rgba(37,99,235,0.2) !important;
-      color: #2563eb !important;
-    }}
-    body.light-theme .proj-wide-left {{ background: #ffffff !important; }}
-    body.light-theme .proj-download-btn {{
-      border-color: rgba(37,99,235,0.3) !important;
-      color: #2563eb !important;
-    }}
-    body.light-theme .proj-download-btn:hover {{
-      background: rgba(37,99,235,0.07) !important;
-    }}
-
-    /* Certifications */
-    body.light-theme .cert-card {{
-      background: #ffffff !important;
-      border-color: rgba(59,130,246,0.15) !important;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06) !important;
-    }}
-    body.light-theme .cert-title  {{ color: #0f172a !important; }}
-    body.light-theme .cert-issuer {{ color: #64748b !important; }}
-
-    /* Skill tags */
-    body.light-theme .tag {{
-      background: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      color: #334155 !important;
-    }}
-    body.light-theme .tag:hover {{
-      border-color: #2563eb !important;
-      color: #2563eb !important;
-      background: rgba(37,99,235,0.05) !important;
-    }}
-
-    /* Contact cards */
-    body.light-theme .contact-card {{
-      background: #ffffff !important;
-      border-color: rgba(59,130,246,0.15) !important;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06) !important;
-    }}
-    body.light-theme .contact-label {{ color: #94a3b8 !important; }}
+    body.light-theme .pcard {{ background: #ffffff !important; border-color: rgba(59,130,246,0.15) !important; }}
+    body.light-theme .pcard-title {{ color: #0f172a !important; }}
+    body.light-theme .cert-card {{ background: #ffffff !important; border-color: rgba(59,130,246,0.15) !important; }}
+    body.light-theme .cert-title {{ color: #0f172a !important; }}
+    body.light-theme .contact-card {{ background: #ffffff !important; border-color: rgba(59,130,246,0.15) !important; }}
     body.light-theme .contact-value {{ color: #0f172a !important; }}
-
-    /* Footer */
-    body.light-theme .footer {{
-      color: #94a3b8 !important;
-      border-top-color: rgba(59,130,246,0.1) !important;
-    }}
-
-    /* FAB buttons */
-    body.light-theme .fab-btn {{
-      background: rgba(255,255,255,0.95) !important;
-      border-color: rgba(59,130,246,0.25) !important;
-      color: #475569 !important;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.1) !important;
-    }}
-    body.light-theme .fab-btn:hover {{
-      background: rgba(37,99,235,0.08) !important;
-      color: #2563eb !important;
-      border-color: #2563eb !important;
-    }}
-    body.light-theme .fab-btn::before {{
-      background: rgba(255,255,255,0.97) !important;
-      color: #334155 !important;
-      border-color: rgba(59,130,246,0.2) !important;
-    }}
+    body.light-theme .section-title {{ color: #0f172a !important; }}
+    body.light-theme .tag {{ background: #ffffff !important; border-color: #cbd5e1 !important; color: #334155 !important; }}
+    body.light-theme .fab-btn {{ background: rgba(255,255,255,0.95) !important; border-color: rgba(59,130,246,0.25) !important; color: #475569 !important; }}
   `;
   parentDoc.head.appendChild(style);
 
   var bar = parentDoc.createElement('div');
   bar.className = 'fab-bar';
 
-  // 1. Theme toggle
   var isDark = true;
   var themeBtn = parentDoc.createElement('button');
   themeBtn.className = 'fab-btn fab-theme';
@@ -1454,7 +1301,6 @@ function injectFAB() {{
     }}
   }});
 
-  // 2. Back to top
   var topBtn = parentDoc.createElement('button');
   topBtn.className = 'fab-btn';
   topBtn.innerHTML = '↑';
@@ -1462,7 +1308,6 @@ function injectFAB() {{
   topBtn.style.fontSize = '20px';
   topBtn.style.fontWeight = '700';
   topBtn.addEventListener('click', function() {{
-    // Try every possible Streamlit scroll container
     var selectors = [
       '[data-testid="stAppViewContainer"]',
       '[data-testid="stMainBlockContainer"]',
@@ -1472,28 +1317,21 @@ function injectFAB() {{
       '.stApp',
       'main'
     ];
-    var scrolled = false;
     for (var i = 0; i < selectors.length; i++) {{
       var el = parentDoc.querySelector(selectors[i]);
       if (el && el.scrollHeight > el.clientHeight) {{
         el.scrollTo({{ top: 0, behavior: 'smooth' }});
-        scrolled = true;
         break;
       }}
     }}
-    // Also scroll every element that has scrolled down (belt & suspenders)
     var all = parentDoc.querySelectorAll('*');
     for (var j = 0; j < all.length; j++) {{
-      if (all[j].scrollTop > 0) {{
-        all[j].scrollTo({{ top: 0, behavior: 'smooth' }});
-      }}
+      if (all[j].scrollTop > 0) all[j].scrollTo({{ top: 0, behavior: 'smooth' }});
     }}
-    // Fallback: scroll the window itself
     parentDoc.documentElement.scrollTo({{ top: 0, behavior: 'smooth' }});
     parentDoc.body.scrollTo({{ top: 0, behavior: 'smooth' }});
   }});
 
-  // 3. Resume download
   var resumeBtn = parentDoc.createElement('a');
   resumeBtn.className = 'fab-btn';
   resumeBtn.innerHTML = '📄';
@@ -1501,7 +1339,6 @@ function injectFAB() {{
   resumeBtn.href = 'data:application/pdf;base64,' + resumeB64;
   resumeBtn.download = 'Mann_Choudhary_Resume.pdf';
 
-  // 4. LinkedIn
   var liBtn = parentDoc.createElement('a');
   liBtn.className = 'fab-btn';
   liBtn.setAttribute('data-tip', 'LinkedIn');
