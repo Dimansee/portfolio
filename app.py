@@ -470,14 +470,14 @@ st.markdown(f"""
 st.markdown('</div>', unsafe_allow_html=True)
 st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
 
-# ── PROJECTS — 6-card grid with rich click-to-expand overlays ────────────────
+# ── PROJECTS — 6-card grid with click-to-expand modal ────────────────────────
 st.markdown('<div id="projects" class="section">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">Projects</div>', unsafe_allow_html=True)
 st.markdown('<p style="text-align:center;color:#64748b;font-size:14px;margin:-10px 0 28px;">Click any card to explore details</p>', unsafe_allow_html=True)
 
-fc_b64  = img_to_b64("assets/forecasting.png")
-sd_b64  = img_to_b64("assets/sales_dashboard.png")
-sql_b64 = img_to_b64("assets/sql_preview.png")
+fc_b64   = img_to_b64("assets/forecasting.png")
+sd_b64   = img_to_b64("assets/sales_dashboard.png")
+sql_b64  = img_to_b64("assets/sql_preview.png")
 case_b64 = img_to_b64("assets/sql_project_slides.pdf")
 
 fc_src   = f"data:image/png;base64,{fc_b64}"   if fc_b64   else ""
@@ -485,15 +485,9 @@ sd_src   = f"data:image/png;base64,{sd_b64}"   if sd_b64   else ""
 sql_src  = f"data:image/png;base64,{sql_b64}"  if sql_b64  else ""
 case_src = f"data:application/pdf;base64,{case_b64}" if case_b64 else ""
 
-# Pre-build the download action HTML so we don't have nested f-strings inside JS
-_case_action = (
-    f'<a href="{case_src}" download="Mann_SQL_Case_Study.pdf" class="pmodal-btn secondary">'
-    '<i class=\\"fas fa-download\\"></i> Download Case Study PDF</a>'
-) if case_src else ""
-
+# ── Card HTML only — no <script> tags (st.markdown strips them) ──
 st.markdown(f"""
 <style>
-/* ── PROJECT GRID — 3 cols ── */
 .proj-grid-6 {{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -501,8 +495,6 @@ st.markdown(f"""
   max-width: 1060px;
   margin: 0 auto;
 }}
-
-/* ── BASE CARD ── */
 .pcard {{
   position: relative;
   background: #0b162c;
@@ -520,8 +512,6 @@ st.markdown(f"""
   box-shadow: 0 16px 40px rgba(59,130,246,0.2);
   border-color: rgba(59,130,246,0.5);
 }}
-
-/* ── ICON BANNER ── */
 .pcard-banner {{
   height: 130px;
   display: flex;
@@ -529,18 +519,14 @@ st.markdown(f"""
   justify-content: center;
   font-size: 52px;
   flex-shrink: 0;
-  position: relative;
 }}
 .pcard-banner img {{
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
   border-radius: 0 !important;
   border: none !important;
   display: block;
 }}
-
-/* ── CARD BODY ── */
 .pcard-body {{
   padding: 14px 16px 16px;
   flex: 1;
@@ -548,11 +534,7 @@ st.markdown(f"""
   flex-direction: column;
   gap: 7px;
 }}
-.pcard-tags {{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}}
+.pcard-tags {{ display: flex; flex-wrap: wrap; gap: 5px; }}
 .pcard-tags span {{
   background: rgba(59,130,246,0.08);
   border: 1px solid rgba(59,130,246,0.25);
@@ -575,192 +557,21 @@ st.markdown(f"""
   line-height: 1.55;
   flex: 1;
 }}
-
-/* ── MODAL OVERLAY ── */
-.pmodal-backdrop {{
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(2,6,23,0.88);
-  backdrop-filter: blur(8px);
-  z-index: 99998;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}}
-.pmodal-backdrop.open {{
-  display: flex;
-}}
-.pmodal {{
-  background: #0b162c;
-  border: 1px solid rgba(59,130,246,0.35);
-  border-radius: 20px;
-  max-width: 680px;
-  width: 100%;
-  max-height: 85vh;
-  overflow-y: auto;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-  animation: modalIn 0.25s ease;
-  position: relative;
-}}
-@keyframes modalIn {{
-  from {{ opacity:0; transform: translateY(20px) scale(0.97); }}
-  to   {{ opacity:1; transform: translateY(0)    scale(1); }}
-}}
-.pmodal-header {{
-  padding: 24px 28px 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}}
-.pmodal-icon {{
-  font-size: 36px;
-  width: 60px;
-  height: 60px;
-  border-radius: 14px;
+.pcard-hint {{
+  font-size: 10px;
+  color: #334155;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  gap: 4px;
+  margin-top: 4px;
 }}
-.pmodal-title {{
-  font-family: 'Syne', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  color: #f1f5f9;
-  margin-bottom: 4px;
-}}
-.pmodal-subtitle {{
-  font-size: 13px;
-  color: #64748b;
-}}
-.pmodal-close {{
-  position: absolute;
-  top: 16px; right: 18px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: #94a3b8;
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  font-size: 16px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s;
-}}
-.pmodal-close:hover {{ background: rgba(239,68,68,0.15); color: #f87171; border-color: rgba(239,68,68,0.3); }}
-.pmodal-body {{
-  padding: 20px 28px 28px;
-}}
-.pmodal-tags {{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 16px;
-}}
-.pmodal-tags span {{
-  background: rgba(59,130,246,0.1);
-  border: 1px solid rgba(59,130,246,0.3);
-  color: #60a5fa;
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-weight: 500;
-}}
-.pmodal-desc {{
-  font-size: 14px;
-  color: #cbd5e1;
-  line-height: 1.75;
-  margin-bottom: 18px;
-}}
-.pmodal-points {{
-  list-style: none;
-  padding: 0;
-  margin: 0 0 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}}
-.pmodal-points li {{
-  font-size: 13px;
-  color: #94a3b8;
-  padding-left: 18px;
-  position: relative;
-  line-height: 1.6;
-}}
-.pmodal-points li::before {{
-  content: '▸';
-  position: absolute;
-  left: 0;
-  color: #3b82f6;
-}}
-.pmodal-actions {{
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}}
-.pmodal-btn {{
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 9px 18px;
-  border-radius: 9px;
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  border: none;
-}}
-.pmodal-btn.primary {{
-  background: #3b82f6;
-  color: white;
-  box-shadow: 0 4px 14px rgba(59,130,246,0.3);
-}}
-.pmodal-btn.primary:hover {{ background: #2563eb; }}
-.pmodal-btn.secondary {{
-  background: transparent;
-  border: 1px solid rgba(59,130,246,0.35);
-  color: #93c5fd;
-}}
-.pmodal-btn.secondary:hover {{ background: rgba(59,130,246,0.08); border-color: #3b82f6; }}
-
-.pmodal-divider {{
-  height: 1px;
-  background: rgba(59,130,246,0.12);
-  margin: 16px 0;
-}}
-
-/* ── RESPONSIVE ── */
 @media (max-width: 900px) {{ .proj-grid-6 {{ grid-template-columns: repeat(2,1fr); }} }}
-@media (max-width: 580px) {{ .proj-grid-6 {{ grid-template-columns: 1fr; }} }}
+@media (max-width: 560px) {{ .proj-grid-6 {{ grid-template-columns: 1fr; }} }}
 </style>
 
-<!-- ════════ MODAL BACKDROP ════════ -->
-<div class="pmodal-backdrop" id="projModal" onclick="closeProjModal(event)">
-  <div class="pmodal" id="projModalBox">
-    <button class="pmodal-close" onclick="document.getElementById('projModal').classList.remove('open')">✕</button>
-    <div class="pmodal-header">
-      <div class="pmodal-icon" id="mIcon"></div>
-      <div>
-        <div class="pmodal-title" id="mTitle"></div>
-        <div class="pmodal-subtitle" id="mSubtitle"></div>
-      </div>
-    </div>
-    <div class="pmodal-body">
-      <div class="pmodal-tags" id="mTags"></div>
-      <div class="pmodal-divider"></div>
-      <div class="pmodal-desc" id="mDesc"></div>
-      <ul class="pmodal-points" id="mPoints"></ul>
-      <div class="pmodal-actions" id="mActions"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════ 6-CARD GRID ════════ -->
 <div class="proj-grid-6">
 
-  <!-- 1. Demand Forecasting -->
-  <div class="pcard" onclick="openProj(0)">
+  <div class="pcard" data-proj="0">
     <div class="pcard-banner" style="background:linear-gradient(135deg,#0a1628,#0d1f3c);">
       {"<img src='" + fc_src + "' alt='Forecasting'/>" if fc_src else '<i class="fas fa-chart-line" style="color:#3b82f6;"></i>'}
     </div>
@@ -768,11 +579,11 @@ st.markdown(f"""
       <div class="pcard-tags"><span>Python</span><span>Prophet</span><span>ML</span><span>Streamlit</span></div>
       <div class="pcard-title">Demand Forecasting Engine</div>
       <div class="pcard-desc">Hybrid SKU-level forecasting using statistical models &amp; Facebook Prophet — live Streamlit app.</div>
+      <div class="pcard-hint"><i class="fas fa-hand-pointer"></i> Click to explore</div>
     </div>
   </div>
 
-  <!-- 2. Sales Dashboard -->
-  <div class="pcard" onclick="openProj(1)">
+  <div class="pcard" data-proj="1">
     <div class="pcard-banner" style="background:linear-gradient(135deg,#0a0f28,#1a0f3c);">
       {"<img src='" + sd_src + "' alt='Sales Dashboard'/>" if sd_src else '<i class="fas fa-chart-bar" style="color:#a855f7;"></i>'}
     </div>
@@ -780,11 +591,11 @@ st.markdown(f"""
       <div class="pcard-tags"><span>Power BI</span><span>DAX</span><span>Power Query</span><span>KPI</span></div>
       <div class="pcard-title">Sales Analytics Dashboard</div>
       <div class="pcard-desc">Interactive KPI dashboard tracking revenue, returns &amp; regional growth trends in Power BI.</div>
+      <div class="pcard-hint"><i class="fas fa-hand-pointer"></i> Click to explore</div>
     </div>
   </div>
 
-  <!-- 3. Baaori ERP -->
-  <div class="pcard" onclick="openProj(2)">
+  <div class="pcard" data-proj="2">
     <div class="pcard-banner" style="background:linear-gradient(135deg,#0a1628,#0c2a1c);">
       <i class="fas fa-sitemap" style="color:#10b981;"></i>
     </div>
@@ -792,11 +603,11 @@ st.markdown(f"""
       <div class="pcard-tags"><span>Apps Script</span><span>Google Sheets</span><span>ERP</span><span>BOM</span></div>
       <div class="pcard-title">Baaori Bazaar ERP System</div>
       <div class="pcard-desc">6-module ERP built from scratch: QC, Production, BOM, Inventory &amp; Order management.</div>
+      <div class="pcard-hint"><i class="fas fa-hand-pointer"></i> Click to explore</div>
     </div>
   </div>
 
-  <!-- 4. E-commerce Reporting -->
-  <div class="pcard" onclick="openProj(3)">
+  <div class="pcard" data-proj="3">
     <div class="pcard-banner" style="background:linear-gradient(135deg,#0f1a0a,#1a2a0a);">
       <i class="fas fa-store" style="color:#f59e0b;"></i>
     </div>
@@ -804,11 +615,11 @@ st.markdown(f"""
       <div class="pcard-tags"><span>Apps Script</span><span>Shopify</span><span>Looker Studio</span><span>SQL</span></div>
       <div class="pcard-title">Multi-Platform E-commerce Reporting</div>
       <div class="pcard-desc">Unified order reporting across 4 marketplaces with automated upsert, dispatch join &amp; daily summaries.</div>
+      <div class="pcard-hint"><i class="fas fa-hand-pointer"></i> Click to explore</div>
     </div>
   </div>
 
-  <!-- 5. LinkedIn Automation Bot -->
-  <div class="pcard" onclick="openProj(4)">
+  <div class="pcard" data-proj="4">
     <div class="pcard-banner" style="background:linear-gradient(135deg,#050d1a,#061424);">
       <i class="fab fa-linkedin" style="color:#0ea5e9;"></i>
     </div>
@@ -816,11 +627,11 @@ st.markdown(f"""
       <div class="pcard-tags"><span>Python</span><span>Selenium</span><span>Gmail API</span><span>Automation</span></div>
       <div class="pcard-title">LinkedIn Job Application Bot</div>
       <div class="pcard-desc">Selenium bot that scrapes job posts, extracts recruiter emails, and auto-sends personalised applications.</div>
+      <div class="pcard-hint"><i class="fas fa-hand-pointer"></i> Click to explore</div>
     </div>
   </div>
 
-  <!-- 6. SQL Business Case Study -->
-  <div class="pcard" onclick="openProj(5)">
+  <div class="pcard" data-proj="5">
     <div class="pcard-banner" style="background:linear-gradient(135deg,#0f0a20,#1a0d30);">
       {"<img src='" + sql_src + "' alt='SQL Preview'/>" if sql_src else '<i class="fas fa-database" style="color:#a855f7;"></i>'}
     </div>
@@ -828,140 +639,323 @@ st.markdown(f"""
       <div class="pcard-tags"><span>SQL</span><span>BigQuery</span><span>Business Analysis</span><span>KPI</span></div>
       <div class="pcard-title">Business Analysis Case Study</div>
       <div class="pcard-desc">End-to-end SQL project: data extraction, KPI analysis, ERD design, and executive slide deck.</div>
+      <div class="pcard-hint"><i class="fas fa-hand-pointer"></i> Click to explore</div>
     </div>
   </div>
 
 </div>
-
-<script>
-var projects = [
-  {{
-    icon: '<i class="fas fa-chart-line" style="color:#3b82f6;"></i>',
-    iconBg: 'rgba(59,130,246,0.12)',
-    title: 'Demand Forecasting Engine',
-    subtitle: 'Python · Prophet · Machine Learning · Streamlit',
-    tags: ['Python','Prophet','SARIMA','XGBoost','Streamlit','Pandas','NumPy'],
-    desc: 'A hybrid SKU-level demand forecasting engine that combines classical statistical models (SARIMA) with Facebook Prophet and machine learning (XGBoost) to generate accurate, multi-horizon forecasts — deployed as a live, interactive Streamlit web application.',
-    points: [
-      'Compared SARIMA, Prophet, and XGBoost across multiple SKUs to identify best-fit model per product',
-      'Built an interactive Streamlit UI where users can select SKU, horizon, and model dynamically',
-      'Visualised forecast vs actuals with confidence intervals and error metrics (MAE, RMSE)',
-      'Deployed on Streamlit Cloud — accessible without any local setup'
-    ],
-    actions: '<a href="https://demand-forecasting-engine-o22shix3vgbi5jgrvi4abg.streamlit.app/" target="_blank" class="pmodal-btn primary"><i class="fas fa-external-link-alt"></i> View Live App</a>'
-  }},
-  {{
-    icon: '<i class="fas fa-chart-bar" style="color:#a855f7;"></i>',
-    iconBg: 'rgba(168,85,247,0.12)',
-    title: 'Sales Analytics Dashboard',
-    subtitle: 'Power BI · DAX · Power Query · KPI Tracking',
-    tags: ['Power BI','Power Query','DAX','KPI','Data Modelling','Excel'],
-    desc: 'An interactive Power BI dashboard built to give business leadership a real-time view of sales performance, regional trends, and return rates — replacing manual Excel reports with a live, filterable dashboard.',
-    points: [
-      'Cleaned and transformed raw sales data using Power Query — handled nulls, type mismatches, and duplicates',
-      'Built a star-schema data model connecting sales, product, region, and time tables',
-      'Created DAX measures for YoY growth, running totals, return rate %, and region-wise contribution',
-      'Designed an interactive layout with slicers for date range, product category, and region'
-    ],
-    actions: ''
-  }},
-  {{
-    icon: '<i class="fas fa-sitemap" style="color:#10b981;"></i>',
-    iconBg: 'rgba(16,185,129,0.12)',
-    title: 'Baaori Bazaar ERP System',
-    subtitle: 'Google Apps Script · Google Sheets · 6 Modules',
-    tags: ['Google Apps Script','Google Sheets','ERP','BOM','QC','Automation','WebApp'],
-    desc: 'A fully custom 6-module ERP system built entirely on Google Sheets and Apps Script for a fashion manufacturing brand — replacing manual WhatsApp-based operations with structured, automated workflows across production, quality, inventory, and orders.',
-    points: [
-      'QC Module: Raw Fabric QC, Production QC, Pre-Dispatch QC workflows with pass/fail tracking',
-      'Production WebApp: Batch tracking from RECEIVED → CUTTING → STITCHING → IRONING → DONE with tailor assignments and split-batch logic',
-      'BOM System: Bill of Materials linked to raw material stock, Ward-wise inventory tracking, and automatic ROL (Reorder Level) alerts',
-      'Orders WebApp: Shopify import integration, priority-based stock allocation, and dispatch sheet joins',
-      'Bridge.gs connector linking BOM spreadsheet to Ward2/Ward3 stock data in real time',
-      'Saved 20+ hours per week across the operations team'
-    ],
-    actions: ''
-  }},
-  {{
-    icon: '<i class="fas fa-store" style="color:#f59e0b;"></i>',
-    iconBg: 'rgba(245,158,11,0.12)',
-    title: 'Multi-Platform E-commerce Reporting',
-    subtitle: 'Google Apps Script · Shopify · 4 Marketplaces',
-    tags: ['Apps Script','Shopify','Looker Studio','SQL','Reporting','Automation'],
-    desc: 'An automated reporting system that aggregates 1,000+ daily orders from four e-commerce platforms (Shopify, Amazon, Flipkart, Myntra) into a single unified dashboard — eliminating manual download-and-paste workflows entirely.',
-    points: [
-      'Built platform-specific parsers handling different date formats, ID types, and column schemas per marketplace',
-      'Implemented upsert logic using order line ID as the key — no duplicates on re-run',
-      'Fixed scientific notation ID normalisation issue that was corrupting Flipkart order IDs',
-      'Automated dispatch sheet joins to flag shipped vs pending orders per platform',
-      'Rebuilt PDF/email report export system using server-side HTML generation',
-      'Aggregated daily order volume, revenue, returns, and fulfilment rate into a Looker Studio dashboard'
-    ],
-    actions: ''
-  }},
-  {{
-    icon: '<i class="fab fa-linkedin" style="color:#0ea5e9;"></i>',
-    iconBg: 'rgba(14,165,233,0.12)',
-    title: 'LinkedIn Job Application Bot',
-    subtitle: 'Python · Selenium · Gmail API · Automation',
-    tags: ['Python','Selenium','Gmail API','Web Scraping','Automation','SMTP'],
-    desc: 'A Python automation bot that searches LinkedIn for job postings matching a target role and location, scrapes recruiter/HR contact emails from post details, and sends personalised application emails with resume — all without manual effort.',
-    points: [
-      'Used Selenium WebDriver to log in, search roles by keyword and location, and navigate job listing pages',
-      'Extracted recruiter names and contact emails from job descriptions and poster profiles',
-      'Integrated Gmail API (OAuth2) to send personalised emails with resume PDF as attachment',
-      'Added delay/randomisation logic to avoid rate limiting and bot detection',
-      'Applied to roles at Redcliffe Labs, Beinex, Airtel, and 10+ other companies using this pipeline'
-    ],
-    actions: ''
-  }},
-  {{
-    icon: '<i class="fas fa-database" style="color:#a855f7;"></i>',
-    iconBg: 'rgba(168,85,247,0.12)',
-    title: 'Business Analysis Case Study',
-    subtitle: 'SQL · BigQuery · ERD · Executive Storytelling',
-    tags: ['SQL','BigQuery','KPI Analysis','ERD','Business Analysis','Slide Deck'],
-    desc: 'An end-to-end SQL business analysis project covering data extraction, transformation, KPI analysis, trend identification, and executive-level storytelling — with a full ERD diagram and a downloadable slide deck presenting the findings.',
-    points: [
-      'Wrote complex SQL queries with multi-table joins, CTEs, window functions, and aggregations in BigQuery',
-      'Designed a normalised Entity Relationship Diagram (ERD) documenting table relationships',
-      'Identified top-performing categories, seasonal trends, and underperforming segments',
-      'Built a slide deck with visual charts and a business narrative suitable for C-suite presentation'
-    ],
-    actions: '{_case_action}'
-  }}
-];
-
-function openProj(i) {{
-  var p = projects[i];
-  var modal = document.getElementById('projModal');
-  document.getElementById('mIcon').innerHTML = p.icon;
-  document.getElementById('mIcon').style.background = p.iconBg;
-  document.getElementById('mTitle').textContent = p.title;
-  document.getElementById('mSubtitle').textContent = p.subtitle;
-  document.getElementById('mTags').innerHTML = p.tags.map(function(t){{return '<span>'+t+'</span>';}}).join('');
-  document.getElementById('mDesc').textContent = p.desc;
-  document.getElementById('mPoints').innerHTML = p.points.map(function(pt){{return '<li>'+pt+'</li>';}}).join('');
-  document.getElementById('mActions').innerHTML = p.actions;
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}}
-
-function closeProjModal(e) {{
-  if (e.target === document.getElementById('projModal')) {{
-    document.getElementById('projModal').classList.remove('open');
-    document.body.style.overflow = '';
-  }}
-}}
-
-document.addEventListener('keydown', function(e) {{
-  if (e.key === 'Escape') {{
-    document.getElementById('projModal').classList.remove('open');
-    document.body.style.overflow = '';
-  }}
-}});
-</script>
 """, unsafe_allow_html=True)
+
+# ── Modal + JS injected into parent document via components.html ──────────────
+_case_dl = (
+    f'<a href="{case_src}" download="Mann_SQL_Case_Study.pdf" '
+    'class="pmodal-btn secondary" style="display:inline-flex;align-items:center;gap:7px;'
+    'padding:9px 18px;border-radius:9px;font-size:13px;font-weight:600;text-decoration:none;'
+    'border:1px solid rgba(59,130,246,0.35);color:#93c5fd;background:transparent;">'
+    '<i class="fas fa-download"></i> Download Case Study PDF</a>'
+) if case_src else ""
+
+components.html(f"""
+<script>
+(function() {{
+  var parentDoc = window.parent.document;
+
+  // ── Inject modal styles into parent ──────────────────────────────────────
+  if (!parentDoc.getElementById('pmodal-styles')) {{
+    var s = parentDoc.createElement('style');
+    s.id = 'pmodal-styles';
+    s.textContent = `
+      .pmodal-backdrop {{
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(2,6,23,0.9);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 999999;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        font-family: 'DM Sans', sans-serif;
+      }}
+      .pmodal-backdrop.open {{ display: flex; }}
+      .pmodal {{
+        background: #0b162c;
+        border: 1px solid rgba(59,130,246,0.4);
+        border-radius: 20px;
+        max-width: 680px;
+        width: 100%;
+        max-height: 85vh;
+        overflow-y: auto;
+        box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+        position: relative;
+        animation: pmodalIn 0.25s ease;
+      }}
+      @keyframes pmodalIn {{
+        from {{ opacity:0; transform:translateY(24px) scale(0.96); }}
+        to   {{ opacity:1; transform:translateY(0)    scale(1); }}
+      }}
+      .pmodal::-webkit-scrollbar {{ width: 4px; }}
+      .pmodal::-webkit-scrollbar-track {{ background: transparent; }}
+      .pmodal::-webkit-scrollbar-thumb {{ background: rgba(59,130,246,0.3); border-radius: 4px; }}
+      .pmodal-header {{
+        padding: 24px 28px 0;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+      }}
+      .pmodal-icon {{
+        font-size: 30px;
+        width: 56px; height: 56px;
+        border-radius: 14px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }}
+      .pmodal-title {{
+        font-family: 'Syne', sans-serif;
+        font-size: 19px;
+        font-weight: 800;
+        color: #f1f5f9;
+        margin: 0 0 4px;
+        line-height: 1.25;
+      }}
+      .pmodal-subtitle {{ font-size: 12px; color: #64748b; margin: 0; }}
+      .pmodal-close {{
+        position: absolute;
+        top: 14px; right: 16px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: #94a3b8;
+        width: 30px; height: 30px;
+        border-radius: 50%;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.2s;
+        line-height: 1;
+      }}
+      .pmodal-close:hover {{ background:rgba(239,68,68,0.15); color:#f87171; border-color:rgba(239,68,68,0.3); }}
+      .pmodal-divider {{ height:1px; background:rgba(59,130,246,0.12); margin:14px 0; }}
+      .pmodal-body {{ padding: 16px 28px 28px; }}
+      .pmodal-tags {{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }}
+      .pmodal-tags span {{
+        background:rgba(59,130,246,0.1);
+        border:1px solid rgba(59,130,246,0.3);
+        color:#60a5fa;
+        font-size:11px;
+        padding:3px 10px;
+        border-radius:20px;
+        font-weight:500;
+      }}
+      .pmodal-desc {{
+        font-size:13.5px; color:#cbd5e1;
+        line-height:1.75; margin-bottom:16px;
+      }}
+      .pmodal-points {{
+        list-style:none; padding:0; margin:0 0 20px;
+        display:flex; flex-direction:column; gap:9px;
+      }}
+      .pmodal-points li {{
+        font-size:13px; color:#94a3b8;
+        padding-left:18px; position:relative; line-height:1.6;
+      }}
+      .pmodal-points li::before {{ content:'▸'; position:absolute; left:0; color:#3b82f6; }}
+      .pmodal-actions {{ display:flex; gap:10px; flex-wrap:wrap; }}
+      .pmodal-btn-primary {{
+        display:inline-flex; align-items:center; gap:7px;
+        padding:9px 18px; border-radius:9px;
+        font-size:13px; font-weight:600;
+        text-decoration:none;
+        background:#3b82f6; color:white;
+        border:none;
+        box-shadow:0 4px 14px rgba(59,130,246,0.3);
+        cursor:pointer; transition:background 0.2s;
+      }}
+      .pmodal-btn-primary:hover {{ background:#2563eb; }}
+    `;
+    parentDoc.head.appendChild(s);
+  }}
+
+  // ── Inject modal HTML into parent ─────────────────────────────────────────
+  if (!parentDoc.getElementById('projModal')) {{
+    var backdrop = parentDoc.createElement('div');
+    backdrop.className = 'pmodal-backdrop';
+    backdrop.id = 'projModal';
+    backdrop.innerHTML = `
+      <div class="pmodal" id="projModalBox">
+        <button class="pmodal-close" id="pmodalClose">✕</button>
+        <div class="pmodal-header">
+          <div class="pmodal-icon" id="mIcon"></div>
+          <div style="flex:1;min-width:0;">
+            <div class="pmodal-title" id="mTitle"></div>
+            <div class="pmodal-subtitle" id="mSubtitle"></div>
+          </div>
+        </div>
+        <div class="pmodal-body">
+          <div class="pmodal-tags" id="mTags"></div>
+          <div class="pmodal-divider"></div>
+          <div class="pmodal-desc" id="mDesc"></div>
+          <ul class="pmodal-points" id="mPoints"></ul>
+          <div class="pmodal-actions" id="mActions"></div>
+        </div>
+      </div>
+    `;
+    parentDoc.body.appendChild(backdrop);
+
+    // Close on backdrop click
+    backdrop.addEventListener('click', function(e) {{
+      if (e.target === backdrop) closeModal();
+    }});
+    // Close button
+    parentDoc.getElementById('pmodalClose').addEventListener('click', closeModal);
+    // Escape key
+    parentDoc.addEventListener('keydown', function(e) {{
+      if (e.key === 'Escape') closeModal();
+    }});
+  }}
+
+  function closeModal() {{
+    var b = parentDoc.getElementById('projModal');
+    if (b) b.classList.remove('open');
+    parentDoc.body.style.overflow = '';
+  }}
+
+  // ── Project data ──────────────────────────────────────────────────────────
+  var projects = [
+    {{
+      icon: '<i class="fas fa-chart-line" style="color:#3b82f6;font-size:28px;"></i>',
+      iconBg: 'rgba(59,130,246,0.12)',
+      title: 'Demand Forecasting Engine',
+      subtitle: 'Python · Prophet · Machine Learning · Streamlit',
+      tags: ['Python','Prophet','SARIMA','XGBoost','Streamlit','Pandas','NumPy'],
+      desc: 'A hybrid SKU-level demand forecasting engine combining SARIMA, Facebook Prophet, and XGBoost to generate accurate multi-horizon forecasts — deployed as a live interactive Streamlit web app.',
+      points: [
+        'Compared SARIMA, Prophet, and XGBoost across multiple SKUs to select best-fit model per product',
+        'Built an interactive Streamlit UI where users can select SKU, forecast horizon, and model type',
+        'Visualised forecast vs actuals with confidence intervals and error metrics (MAE, RMSE)',
+        'Deployed on Streamlit Cloud — accessible without any local setup'
+      ],
+      actionHtml: '<a href="https://demand-forecasting-engine-o22shix3vgbi5jgrvi4abg.streamlit.app/" target="_blank" class="pmodal-btn-primary"><i class="fas fa-external-link-alt"></i> View Live App</a>'
+    }},
+    {{
+      icon: '<i class="fas fa-chart-bar" style="color:#a855f7;font-size:28px;"></i>',
+      iconBg: 'rgba(168,85,247,0.12)',
+      title: 'Sales Analytics Dashboard',
+      subtitle: 'Power BI · DAX · Power Query · KPI Tracking',
+      tags: ['Power BI','Power Query','DAX','KPI','Data Modelling','Excel'],
+      desc: 'An interactive Power BI dashboard giving business leadership a real-time view of sales performance, regional trends, and return rates — replacing manual Excel reports with a live filterable dashboard.',
+      points: [
+        'Cleaned and transformed raw sales data using Power Query — handled nulls, type mismatches, and duplicates',
+        'Built a star-schema data model connecting sales, product, region, and time tables',
+        'Created DAX measures for YoY growth, running totals, return rate %, and region-wise contribution',
+        'Designed an interactive layout with slicers for date range, product category, and region'
+      ],
+      actionHtml: ''
+    }},
+    {{
+      icon: '<i class="fas fa-sitemap" style="color:#10b981;font-size:28px;"></i>',
+      iconBg: 'rgba(16,185,129,0.12)',
+      title: 'Baaori Bazaar ERP System',
+      subtitle: 'Google Apps Script · Google Sheets · 6 Modules',
+      tags: ['Google Apps Script','Google Sheets','ERP','BOM','QC','Automation','WebApp'],
+      desc: 'A fully custom 6-module ERP built on Google Sheets + Apps Script for a fashion brand — replacing WhatsApp-based operations with structured automated workflows across QC, production, inventory, and orders.',
+      points: [
+        'QC Module: Raw Fabric QC, Production QC, Pre-Dispatch QC workflows with pass/fail tracking',
+        'Production WebApp: Batch flow RECEIVED → CUTTING → STITCHING → IRONING → DONE with tailor assignments and split-batch logic',
+        'BOM System: Bill of Materials linked to raw material stock with Ward-wise inventory and automatic ROL alerts',
+        'Orders WebApp: Shopify import, priority-based stock allocation, and dispatch sheet joins',
+        'Bridge.gs connector linking BOM to Ward2/Ward3 stock in real time',
+        'Saved 20+ hours per week across the entire operations team'
+      ],
+      actionHtml: ''
+    }},
+    {{
+      icon: '<i class="fas fa-store" style="color:#f59e0b;font-size:28px;"></i>',
+      iconBg: 'rgba(245,158,11,0.12)',
+      title: 'Multi-Platform E-commerce Reporting',
+      subtitle: 'Google Apps Script · Shopify · 4 Marketplaces',
+      tags: ['Apps Script','Shopify','Looker Studio','SQL','Reporting','Automation'],
+      desc: 'Automated reporting that aggregates 1,000+ daily orders from four platforms (Shopify, Amazon, Flipkart, Myntra) into one unified dashboard — eliminating all manual download-and-paste work.',
+      points: [
+        'Built platform-specific parsers handling different date formats, ID types, and schemas per marketplace',
+        'Implemented upsert logic using order line ID as the key — no duplicates on re-run',
+        'Fixed scientific notation ID issue that was corrupting Flipkart order IDs in Google Sheets',
+        'Automated dispatch sheet joins to flag shipped vs pending orders per platform',
+        'Rebuilt PDF/email report export using server-side HTML generation',
+        'Aggregated daily volume, revenue, returns, and fulfilment rate into a Looker Studio dashboard'
+      ],
+      actionHtml: ''
+    }},
+    {{
+      icon: '<i class="fab fa-linkedin" style="color:#0ea5e9;font-size:28px;"></i>',
+      iconBg: 'rgba(14,165,233,0.12)',
+      title: 'LinkedIn Job Application Bot',
+      subtitle: 'Python · Selenium · Gmail API · Automation',
+      tags: ['Python','Selenium','Gmail API','Web Scraping','Automation','SMTP'],
+      desc: 'A Python bot that searches LinkedIn for matching job posts, extracts recruiter emails from listings, and auto-sends personalised application emails with a resume attachment — fully hands-free.',
+      points: [
+        'Used Selenium WebDriver to log in, search by role/location, and navigate job listing pages',
+        'Extracted recruiter names and contact emails from job descriptions and poster profiles',
+        'Integrated Gmail API (OAuth2) to send personalised emails with resume PDF attached',
+        'Added delay and randomisation logic to avoid rate limiting and bot detection',
+        'Used to apply to Redcliffe Labs, Beinex, Airtel, and 10+ other companies'
+      ],
+      actionHtml: ''
+    }},
+    {{
+      icon: '<i class="fas fa-database" style="color:#a855f7;font-size:28px;"></i>',
+      iconBg: 'rgba(168,85,247,0.12)',
+      title: 'Business Analysis Case Study',
+      subtitle: 'SQL · BigQuery · ERD · Executive Storytelling',
+      tags: ['SQL','BigQuery','KPI Analysis','ERD','Business Analysis','Slide Deck'],
+      desc: 'An end-to-end SQL business analysis project covering data extraction, transformation, KPI analysis, trend identification, and C-suite storytelling — with a full ERD and downloadable slide deck.',
+      points: [
+        'Wrote complex SQL queries with multi-table joins, CTEs, window functions, and aggregations in BigQuery',
+        'Designed a normalised Entity Relationship Diagram (ERD) documenting all table relationships',
+        'Identified top-performing categories, seasonal trends, and underperforming product segments',
+        'Built a slide deck with visual charts and narrative suitable for executive presentation'
+      ],
+      actionHtml: '{_case_dl}'
+    }}
+  ];
+
+  // ── Wire up card clicks in parent document ────────────────────────────────
+  function attachClicks() {{
+    var cards = parentDoc.querySelectorAll('.pcard[data-proj]');
+    cards.forEach(function(card) {{
+      if (card.dataset.wired) return;
+      card.dataset.wired = '1';
+      card.addEventListener('click', function() {{
+        var idx = parseInt(card.getAttribute('data-proj'));
+        openProj(idx);
+      }});
+    }});
+  }}
+
+  function openProj(i) {{
+    var p = projects[i];
+    parentDoc.getElementById('mIcon').innerHTML = p.icon;
+    parentDoc.getElementById('mIcon').style.background = p.iconBg;
+    parentDoc.getElementById('mTitle').textContent = p.title;
+    parentDoc.getElementById('mSubtitle').textContent = p.subtitle;
+    parentDoc.getElementById('mTags').innerHTML = p.tags.map(function(t) {{
+      return '<span>' + t + '</span>';
+    }}).join('');
+    parentDoc.getElementById('mDesc').textContent = p.desc;
+    parentDoc.getElementById('mPoints').innerHTML = p.points.map(function(pt) {{
+      return '<li>' + pt + '</li>';
+    }}).join('');
+    parentDoc.getElementById('mActions').innerHTML = p.actionHtml;
+    parentDoc.getElementById('projModal').classList.add('open');
+    parentDoc.body.style.overflow = 'hidden';
+  }}
+
+  attachClicks();
+  setTimeout(attachClicks, 600);
+  setTimeout(attachClicks, 1500);
+}})();
+</script>
+""", height=0)
 
 st.markdown('</div>', unsafe_allow_html=True)
 st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
