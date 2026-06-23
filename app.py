@@ -194,8 +194,8 @@ st.markdown("""
   </div>
 
   <h1>Mann Choudhary</h1>
-  <div class="hero-subtitle">Data Analyst &nbsp;|&nbsp; Python &nbsp;|&nbsp; SQL &nbsp;|&nbsp; Power BI</div>
-  <div class="hero-tagline">Transforming raw data into actionable insights &amp; analytical solutions.</div>
+  <div class="hero-subtitle">Data Analyst &nbsp;|&nbsp; MIS Analyst &nbsp;|&nbsp; Business Analyst</div>
+  <div class="hero-tagline">Building data systems, automations &amp; insights that drive real decisions.</div>
 
   <!-- FIX 5: location tag -->
   <div class="location-tag">
@@ -209,16 +209,16 @@ st.markdown("""
 st.markdown("""
 <div class="metrics">
   <div class="metric-item">
-    <h3>40%</h3>
-    <p>Reporting Automation</p>
+    <h3>6</h3>
+    <p>ERP Modules Built</p>
   </div>
   <div class="metric-item">
-    <h3>12+</h3>
-    <p>KPI Dashboards Built</p>
+    <h3>1000+</h3>
+    <p>Orders Managed / Month</p>
   </div>
   <div class="metric-item">
-    <h3>10+</h3>
-    <p>Projects Completed</p>
+    <h3>20+ Hrs</h3>
+    <p>Saved Weekly via Automation</p>
   </div>
   <div class="metric-item">
     <h3>4+ Yrs</h3>
@@ -288,21 +288,22 @@ with col1:
     st.image("assets/profile.png", width=220)
 with col2:
     st.markdown("""
-Hi, I'm <b>Mann Choudhary</b> — a Data Analyst passionate about turning raw data into meaningful insights
-that help businesses make smarter decisions.
+Hi, I'm <b>Mann Choudhary</b> — a Data Analyst and builder based in Jaipur, passionate about turning
+raw data into systems, insights, and decisions that actually move the needle.
 
-<p>With <b>2+ years of experience</b> in data operations and MIS reporting, I have worked with large datasets,
-built reports, and developed analytical solutions that improve business visibility and performance.</p>
+<p>With <b>4+ years of experience</b> across e-commerce, import/export, and fashion-tech startups, I work
+at the intersection of data and operations — building tools people actually use every day, not just
+dashboards that get screenshots and forgotten.</p>
 
 <ul class="abt-points">
-  <li><b>Data Analysis &amp; Programming</b> — Python (Pandas, NumPy), SQL (joins, aggregations, performance queries)</li>
-  <li><b>Visualization &amp; Reporting</b> — Power BI, Looker Studio, Excel (pivot tables, advanced formulas), Google Sheets</li>
-  <li><b>Data Platforms</b> — BigQuery (large-scale querying), GCP, SQL databases</li>
+  <li><b>Analytics &amp; Automation</b> — Python (Pandas, NumPy, Prophet, XGBoost), SQL, Google Apps Script; built a <b>6-module ERP</b> on Google Sheets saving 20+ hrs/week</li>
+  <li><b>Visualization &amp; Reporting</b> — Power BI, Looker Studio, Streamlit; e-commerce reporting across Shopify, Amazon, Flipkart &amp; Myntra</li>
+  <li><b>Data Platforms &amp; AI</b> — BigQuery, GCP, MySQL; prompt engineering and AI-assisted development with Claude &amp; Gemini</li>
 </ul>
 
-<p>Recently I built and deployed a <b>SKU-level demand forecasting engine</b> using statistical models, Prophet,
-and machine learning — accessible via a Streamlit application. I'm continuously expanding my skills in
-advanced analytics, predictive modelling, and data storytelling.</p>
+<p>Currently at <b>Baaori Bazaar</b> (Founder's Office), I lead a 2-person analyst team, built the company's
+entire data infrastructure from scratch, and manage 1,000+ monthly orders across four marketplaces.
+I'm actively looking for Data Analyst, MIS Analyst, or Business Analyst roles in Jaipur, Noida, or Pune.</p>
 """, unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
@@ -322,6 +323,54 @@ else:
 st.markdown(f"""
 <div class="exp-container">
 
+  <!-- Baaori Bazaar — Current Role -->
+  <div class="exp-card">
+    <div class="exp-accent-bar" style="background:linear-gradient(to bottom,#10b981,rgba(16,185,129,0.05));"></div>
+    <div class="exp-inner">
+      <div class="exp-header">
+        <div class="exp-logo" style="background:rgba(16,185,129,0.12);color:#10b981;border:1px solid rgba(16,185,129,0.3);width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:18px;font-weight:800;flex-shrink:0;">B</div>
+        <div class="exp-header-text">
+          <div class="exp-role">Data Analyst</div>
+          <div class="exp-sub-role">Founder's Office</div>
+          <div class="exp-company-row">
+            <span class="exp-company" style="color:#34d399;">Baaori Bazaar</span>
+            <span class="exp-type-badge" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.3);color:#6ee7b7;">Full-time</span>
+          </div>
+        </div>
+        <div class="exp-date-block">
+          <div class="exp-date">Apr 2026 — Present</div>
+          <div class="exp-duration" style="color:#10b981;font-weight:600;">Current</div>
+        </div>
+      </div>
+      <div class="exp-impact-row">
+        <div class="exp-impact-chip" style="border-color:rgba(16,185,129,0.3);background:rgba(16,185,129,0.07);">
+          <span class="chip-num" style="color:#34d399;">6</span>
+          <span class="chip-label">ERP Modules</span>
+        </div>
+        <div class="exp-impact-chip" style="border-color:rgba(16,185,129,0.3);background:rgba(16,185,129,0.07);">
+          <span class="chip-num" style="color:#34d399;">20+ Hrs</span>
+          <span class="chip-label">Saved Weekly</span>
+        </div>
+        <div class="exp-impact-chip" style="border-color:rgba(16,185,129,0.3);background:rgba(16,185,129,0.07);">
+          <span class="chip-num" style="color:#34d399;">1000+</span>
+          <span class="chip-label">Orders/Month</span>
+        </div>
+      </div>
+      <ul class="exp-points">
+        <li>Built a <b>6-module ERP system</b> on Google Sheets + Apps Script covering QC management, production tracking, raw materials/BOM, and order management — saving 20+ hours per week.</li>
+        <li>Designed and own end-to-end <b>e-commerce reporting</b> across Shopify, Amazon, Flipkart, and Myntra, processing 1,000+ orders monthly with automated upsert and dispatch tracking.</li>
+        <li>Created a Production WebApp tracking batch flow through RECEIVED → CUTTING → STITCHING → IRONING → DONE with tailor/cutting master assignments and split-batch logic.</li>
+        <li>Built a Raw Materials Ward system with BOM integration, ROL alerts, and stock tracking across multiple warehouses.</li>
+        <li>Lead and mentor <b>2 junior analysts</b>, defining data workflows and quality standards across the team.</li>
+      </ul>
+      <div class="exp-tools-row">
+        <span>Google Apps Script</span><span>Google Sheets</span><span>Shopify</span>
+        <span>Python</span><span>SQL</span><span>ERP Design</span><span>E-commerce Analytics</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAADAA -->
   <div class="exp-card">
     <div class="exp-accent-bar"></div>
     <div class="exp-inner">
@@ -383,8 +432,8 @@ st.markdown(f"""
           </div>
         </div>
         <div class="exp-date-block">
-          <div class="exp-date">Jul 2022 — Dec 2024</div>
-          <div class="exp-duration">2.5 years</div>
+          <div class="exp-date">Jul 2022 — May 2025</div>
+          <div class="exp-duration">2 yrs 10 months</div>
         </div>
       </div>
       <div class="exp-impact-row">
@@ -488,7 +537,29 @@ st.markdown(f"""
     </div>
   </div>
  
-  <!-- Card 3 — full width -->
+  <!-- Card 3 — ERP System -->
+  <div class="proj-card">
+    <div class="proj-img-wrap">
+      <div class='proj-img-placeholder' style='height:200px;background:linear-gradient(135deg,#0a1628,#0f2d1a);'>
+        <i class='fas fa-sitemap' style='color:#10b981;font-size:48px;'></i>
+      </div>
+      <div class="proj-overlay">
+        <div class="proj-overlay-content">
+          <div class="proj-overlay-title">Multi-Module ERP System</div>
+          <div class="proj-overlay-desc">End-to-end business ops platform built in Google Sheets + Apps Script.</div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-body">
+      <div class="proj-tags">
+        <span>Google Apps Script</span><span>Google Sheets</span><span>ERP</span><span>Automation</span>
+      </div>
+      <div class="proj-title">Baaori Bazaar ERP System</div>
+      <div class="proj-desc">Built a 6-module ERP from scratch: QC workflows, Production WebApp with batch tracking, Raw Materials + BOM system, and multi-platform order management across Shopify, Amazon, Flipkart &amp; Myntra — saving 20+ hrs/week.</div>
+    </div>
+  </div>
+
+  <!-- Card 4 — full width -->
   <div class="proj-card proj-card-wide">
     <div class="proj-wide-left">
       <div class="proj-tags">
@@ -547,6 +618,9 @@ nodes = [
     Node(id="ChatGPT",            label="ChatGPT",             size=45, shape="circle", color=colors["ai"],     font={"size": 8,  "color": "white"}),
     Node(id="Gemini",             label="Gemini",              size=45, shape="circle", color=colors["ai"],     font={"size": 8,  "color": "white"}),
     Node(id="Prompt Engineering", label="Prompt Engineering",  size=45, shape="circle", color=colors["ai"],     font={"size": 8,  "color": "white"}),
+    Node(id="Apps Script",        label="Apps Script",         size=45, shape="circle", color=colors["tech"],   font={"size": 8,  "color": "white"}),
+    Node(id="ERP Design",         label="ERP Design",          size=45, shape="circle", color=colors["biz"],    font={"size": 8,  "color": "white"}),
+    Node(id="Streamlit",          label="Streamlit",           size=45, shape="circle", color=colors["tech"],   font={"size": 8,  "color": "white"}),
     Node(id="Communication",      label="Communication",       size=45, shape="circle", color=colors["soft"],   font={"size": 8,  "color": "white"}),
     Node(id="Collaboration",      label="Collaboration",       size=45, shape="circle", color=colors["soft"],   font={"size": 8,  "color": "white"}),
     Node(id="Problem Solving",    label="Problem Solving",     size=45, shape="circle", color=colors["soft"],   font={"size": 8,  "color": "white"}),
@@ -572,6 +646,9 @@ edges = [
     Edge(source="P",  target="Communication"),
     Edge(source="P",  target="Collaboration"),
     Edge(source="P",  target="Problem Solving"),
+    Edge(source="T",  target="Apps Script"),
+    Edge(source="T",  target="Streamlit"),
+    Edge(source="B",  target="ERP Design"),
 ]
 
 config = Config(
@@ -587,11 +664,14 @@ agraph(nodes=nodes, edges=edges, config=config)
 st.markdown('<div class="section-title" style="font-size:24px; margin-top:30px;">Core Skill Stack</div>', unsafe_allow_html=True)
 
 tags = [
-    "Data Analyst", "Python", "SQL", "Power BI", "Tableau", "Looker Studio",
-    "BigQuery", "GCP", "Excel", "Google Sheets", "BRDs",
-    "Forecasting", "Data Visualization", "Business Intelligence",
-    "Data Storytelling", "Reporting", "KPI Analysis",
-    "Pandas", "NumPy", "Matplotlib", "Streamlit", "Collaboration", "Communication"
+    "Data Analyst", "MIS Analyst", "Business Analyst",
+    "Python", "SQL", "Google Apps Script", "Streamlit",
+    "Power BI", "Looker Studio", "Tableau", "Excel", "Google Sheets",
+    "BigQuery", "MySQL", "GCP",
+    "Pandas", "NumPy", "Prophet", "XGBoost", "SARIMA",
+    "ERP Design", "E-commerce Analytics", "Shopify", "Amazon", "Flipkart",
+    "KPI Analysis", "Forecasting", "BRD / FRD", "Stakeholder Management",
+    "Data Visualization", "Reporting Automation", "Agile"
 ]
 
 st.markdown(
@@ -610,15 +690,6 @@ st.markdown('<div class="section-title">Certifications</div>', unsafe_allow_html
 
 st.markdown("""
 <div class="cert-grid">
-
-  <div class="cert-card">
-    <div class="cert-icon"><i class="fas fa-brain"></i></div>
-    <div class="cert-body">
-      <div class="cert-title">Data Science</div>
-      <div class="cert-issuer">Tutedude</div>
-      <div class="cert-status in-progress">In Progress</div>
-    </div>
-  </div>
 
   <div class="cert-card">
     <div class="cert-icon" style="color:#0078d4;"><i class="fab fa-python"></i></div>
@@ -641,9 +712,18 @@ st.markdown("""
   <div class="cert-card">
     <div class="cert-icon" style="color:#10b981;"><i class="fas fa-chart-bar"></i></div>
     <div class="cert-body">
-      <div class="cert-title">Business Analyst</div>
-      <div class="cert-issuer">Skill Academy (Testbook)</div>
+      <div class="cert-title">Business Analyst Career Program</div>
+      <div class="cert-issuer">Skill Academy by Testbook</div>
       <div class="cert-status completed">Completed</div>
+    </div>
+  </div>
+
+  <div class="cert-card">
+    <div class="cert-icon" style="color:#a855f7;"><i class="fas fa-brain"></i></div>
+    <div class="cert-body">
+      <div class="cert-title">Data Science</div>
+      <div class="cert-issuer">Tutedude</div>
+      <div class="cert-status in-progress">In Progress</div>
     </div>
   </div>
 
@@ -662,7 +742,7 @@ st.markdown('<div class="section-title">Get In Touch</div>', unsafe_allow_html=T
 
 st.markdown("""
 <p style="text-align:center; color:#94a3b8; margin-bottom:10px; font-size:16px;">
-  Open to Data Analyst, Analytics Engineer, and BI roles.
+  Open to Data Analyst, MIS Analyst, and Business Analyst roles.
 </p>
 <p style="text-align:center; color:#64748b; margin-bottom:30px; font-size:14px;">
   <i class="fas fa-map-marker-alt" style="color:#3b82f6;"></i>
@@ -706,7 +786,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 # ── FOOTER ────────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="footer">
-  <p>Built with love using Python &amp; Streamlit &nbsp;&bull;&nbsp; Mann Choudhary 2025</p>
+  <p>Built with love using Python &amp; Streamlit &nbsp;&bull;&nbsp; Mann Choudhary 2026</p>
 </div>
 """, unsafe_allow_html=True)
 
